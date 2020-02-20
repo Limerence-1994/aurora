@@ -1,0 +1,23 @@
+<header class="header smallest" [ngClass]="mode">
+  <div class="header-content">
+    <div class="col-2 logo">LOGO</div>
+    <div class="col-8 nav">
+      <app-router-nav>
+        <app-router-nav-item
+          *ngFor="let link of navigation"
+          [label]="link.name"
+          [routerLink]="link.src"
+          routerLinkActive="routerLinkActive"
+        ></app-router-nav-item>
+      </app-router-nav>
+    </div>
+    <div class="col-2 action asc-buttons">
+      <button mat-icon-button (click)="userSession()">
+        <fa-icon size="lg" icon="sign-in-alt"></fa-icon>
+      </button>
+      <button mat-icon-button><fa-icon size="lg" icon="bell"></fa-icon></button>
+      <button mat-icon-button><fa-icon size="lg" icon="search"></fa-icon></button>
+      <button mat-icon-button><fa-icon size="lg" icon="expand"></fa-icon></button>
+    </div>
+  </div>
+</header>

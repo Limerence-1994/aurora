@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Aurora</title>
+  <base href="/">
+
+  <!--网站信息-->
+  <meta name="copyright" content="Aurora"/>
+  <meta name="description" content="极光共同体"/>
+  <meta name="keywords" content="论坛,科技论坛,forum,aurora"/>
+  <meta http-equiv="Content-Language" content="zh-CN"/>
+  <meta name="author" content="Lee,aurora-club@outlook.com"/>
+  <!--环境声明-->
+  <meta name="renderer" content="webkit">
+  <meta name="full-screen" content="yes"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="screen-orientation" content="portrait"/>
+  <meta name="x5-orientation" content="portrait"/>
+  <meta name="x5-fullscreen" content="true" />
+  <meta name="x5-page-mode" content="app" />
+  <meta name="browsermode" content="application" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#2a2a2d" />
+  <meta name="mobile-web-app-capable" content="yes">  <!-- Tell iOS it's a PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">   <!-- Make sure theme-color is defined -->
+
+  <link rel="icon" type="image/x-icon" href="data:image/ico;">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+        integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y"
+        crossorigin="anonymous">
+  <style>
+    @keyframes title {
+      0% {
+        opacity: 0;
+        transform: translate3d(-130px,0,0);
+      }
+
+      48% {
+        opacity: 0;
+        transform: translate3d(-130px,0,0);
+      }
+
+      52% {
+        opacity: 1;
+        transform: translate3d(-20px,0,0);
+      }
+
+      75% {
+        opacity: 1;
+        transform: translate3d(-10px,0,0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate3d(0,0,0);
+      }
+    }
+    @keyframes fade {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+    @keyframes bg {
+      0% {
+        background-color: #306f99;
+      }
+
+      50% {
+        background-color: #19470f;
+      }
+
+      90% {
+        background-color: #734a10;
+      }
+    }
+    @keyframes blink {
+      0% {
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      10% {
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      20% {
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 1;
+      }
+
+      30% {
+        opacity: 0;
+      }
+
+      35% {
+        opacity: 1;
+      }
+
+      40% {
+        opacity: 0;
+        transform: translate3d(0,0,0);
+      }
+
+      45% {
+        opacity: 1;
+        transform: translate3d(-80px,0,0);
+      }
+
+      50% {
+        opacity: 0;
+        transform: translate3d(0,0,0);
+      }
+
+      51% {
+        transform: translate3d(0,0,0);
+      }
+
+      55% {
+        opacity: 1;
+      }
+
+      60% {
+        opacity: 0;
+      }
+
+      65% {
+        opacity: 1;
+      }
+
+      70% {
+        opacity: 0;
+      }
+
+      75% {
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 0;
+      }
+
+      85% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0;
+        transform: translate3d(0,0,0);
+      }
+
+      95% {
+        opacity: 1;
+        transform: translate3d(-80px,0,0);
+      }
+
+      96% {
+        transform: translate3d(0,0,0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate3d(0,0,0);
+      }
+    }
+    #ld-container {
+      background: #2a2a2d;
+      color: #eaf7ff;
+      width:100%;
+      height:100%;
+      top:0;
+      left:0;
+      position:fixed;
+      z-index: 20;
+      transition: opacity 300ms;
+    }
+    .ld-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -80px;
+      margin-top: -40px;
+    }
+    .ld-bg {
+      padding: 30px 30px 30px 0;
+      background: #306f99;
+      animation: bg 1.5s linear infinite;
+      box-shadow: inset 0 0 45px 30px #2a2a2d;
+    }
+    .loading {
+      position: relative;
+      text-align: right;
+      text-shadow: 0 0 6px #bce4ff;
+      height: 20px;
+      width: 150px;
+    }
+    .loading span {
+      display: block;
+      text-transform: uppercase;
+      position: absolute;
+      right: 30px;
+      height: 20px;
+      width: 200px;
+      line-height: 20px;
+    }
+    .loading span:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -2px;
+      right: -21px;
+      height: 20px;
+      width: 16px;
+      background: #eaf7ff;
+      box-shadow: 0 0 15px #bce4ff;
+      animation: blink 3.4s infinite;
+    }
+    .loading span.ld-title {
+      animation: title 3.4s linear infinite;
+    }
+    .loading span.ld-text {
+      animation: title 3.4s linear 1.7s infinite;
+      opacity: 0;
+    }
+    .ld-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+<noscript>
+  <p>您需要启用JavaScript才能运行此应用。</p>
+  <p>You need to enable JavaScript to run this app.</p>
+  <p>Вам нужно включить JavaScript, чтобы запустить это приложение.</p>
+  <p>このアプリを実行するには、JavaScriptを有効にする必要があります。</p>
+  <p>이 응용 프로그램을 실행하려면 JavaScript 를 사용해야합니다.</p>
+</noscript>
+<app-root></app-root>
+<div id="ld-container">
+  <div class="ld-wrap">
+    <div class="ld-bg">
+      <div class="loading">
+        <span class="ld-title">loading</span>
+        <span class="ld-text">正在连接.....</span>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;clear:both;"></div>
+</div>
+<script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
+        integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
+        crossorigin="anonymous"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js">
+  hljs.configure({
+    languages: ['javascript', 'ruby', 'bash', 'typescript', 'haskell', 'go', 'c', 'c#', 'java', 'sass']
+  });
+</script>
+</body>
+</html>

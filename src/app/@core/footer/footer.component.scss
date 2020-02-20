@@ -1,0 +1,218 @@
+@import "~src/app/@design/default";
+
+$footer-height: 136px;
+$lining-height: 16px;
+$part-width: 230px;
+
+.footer-box {
+  position: relative;
+  height: $footer-height;
+}
+
+.footer {
+  height: $footer-height;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: $level-height;
+
+  .asc-grid {
+    overflow: hidden;
+    max-height: 100%;
+    height: calc(100% - #{$lining-height*2});
+  }
+
+  &.close {
+    transition: $time-ele-close $easing-tans;
+  }
+
+  // 装饰性
+  &-beam {
+    position: relative;
+  }
+
+  &-beam.open &-part {
+    &.left {
+      transition-delay: $time-detailed;
+      transform: translate3d($part-width, 0, 0);
+    }
+
+    &.right {
+      transition-delay: $time-detailed;
+      transform: translate3d(-$part-width, 0, 0);
+    }
+  }
+
+  &-part {
+    width: $part-width;
+    height: $part-height;
+    position: absolute;
+    top: -($part-height + 1);
+    transition: $time-complex $easing-tans;
+
+    &.left::after, &.right::before {
+      display: none
+    }
+
+    &.left {
+      left: -$part-width;
+    }
+
+    &.right {
+      right: -$part-width;
+    }
+
+    &.left::before {
+      transform-origin: bottom left;
+    }
+
+    &.right::after {
+      transform-origin: bottom right;
+    }
+  }
+
+  &-content {
+    position: relative;
+    height: 100%;
+    max-height: 100%;
+    padding: 0 32px;
+  }
+
+  &-float {
+    position: absolute;
+    height: $footer-height - ($lining-height * 2 + 2);
+    z-index: 0;
+    width: calc(100% + 80px);
+    transform: skewX(-45deg);
+  }
+
+  &-float.left {
+    top: 0;
+    right: 0;
+  }
+
+  &-float.right {
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 96px;
+  }
+
+  &-title--small {
+    padding-top: 30px;
+    animation: view forwards linear 1 300ms;
+  }
+
+  &-copyright {
+    transform: skewX(45deg);
+
+    span {
+      margin: 0 16px;
+    }
+  }
+
+  &-list-box {
+    display: flex;
+    padding-top: 16px;
+    animation: view forwards linear 1 300ms;
+  }
+
+  &-list {
+    text-align: left;
+    padding: 1rem;
+    width: 25%;
+
+    a {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    li {
+      list-style-type: none;
+      line-height: 36px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.footer.open {
+  height: 460px;
+  transition: $time-ele-open $easing-enter;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &, & img {
+    height: $footer-height - $lining-height * 2;
+  }
+}
+
+.title {
+  padding-left: $main-pd-right;
+  font-family: 'heading', sans-serif;
+  @media (max-width: $Breakpoint-xl) {
+    font-size: 1rem;
+  }
+  @media (max-width: $Breakpoint-lg) {
+    display: none;
+  }
+}
+
+.bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+}
+
+.lining {
+  height: $lining-height;
+}
+
+.button-open {
+  position: absolute !important;
+  border: 2px solid black;
+  top: calc(50% - 22px);
+  right: 8px;
+  line-height: 0;
+  z-index: $level-height;
+  cursor: pointer;
+
+  &.load {
+    animation: forwards infinite 1s rotate;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0)
+  }
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes view {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.list_icon {
+  display: inline-block;
+  width: 22px;
+  text-align: center;
+}

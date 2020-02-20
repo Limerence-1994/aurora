@@ -1,0 +1,11 @@
+<div class="core">
+  <app-header [mode]="mode"></app-header>
+  <div class="theme-scrollbar core-content" cdkScrollable>
+    <div #cdRef></div>
+    <app-curtain-wall [mode]="mode">
+      <ng-content></ng-content>
+    </app-curtain-wall>
+    <div style="position: fixed;left: 20%; top: 100px;">{{mode}}</div>
+  </div>
+  <app-footer [mode]="mode"></app-footer>
+</div>

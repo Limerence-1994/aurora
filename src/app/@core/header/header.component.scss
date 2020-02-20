@@ -1,0 +1,32 @@
+@import "../../@design/default";
+
+.header {
+  padding: 0 32px;
+  position: fixed;
+  z-index: $level-max;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $nav-height;
+  line-height: $nav-height;
+  transition: $time-detailed $easing-tans;
+  &.open {
+    transform: translate3d(0, 0, 0)
+  }
+  &.simplify, &.initial, &.close {
+    transform: translate3d(0, calc(-100% + 2px), 0)
+  }
+  &-content {
+    display: flex;
+    align-items: center;
+  }
+  .action {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+
+.nav {
+  //padding-top: 2px;
+}

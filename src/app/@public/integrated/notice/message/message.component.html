@@ -1,0 +1,23 @@
+<div class="theme-notice message"
+     [@state]="animationState"
+     (@state.done)="endOfAnimation($event)">
+  <div class="msg-progress" [ngClass]="config.displayType || 'base'">
+    <pc-progress-circle
+      class="circle"
+      mode="determinate"
+      diameter="15"
+      [cycle]="config.duration"
+      (done)="shutdown()"
+    ></pc-progress-circle>
+    <div class="msg-directive"></div>
+  </div>
+  <div class="msg-content">
+    <div class="msg-text">{{data.message}}</div>
+    <button mat-button *ngIf="textButton" (click)="shutdown()">{{data.action}}</button>
+    <button mat-icon-button *ngIf="iconButton" (click)="shutdown()">
+      <fa-icon [icon]="data.action"></fa-icon>
+    </button>
+  </div>
+</div>
+
+

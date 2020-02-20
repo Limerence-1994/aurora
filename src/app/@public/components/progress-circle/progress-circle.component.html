@@ -1,0 +1,10 @@
+<div class="progress" [ngClass]="mode">
+  <svg [style.width]="size" [style.height]="size">
+    <circle id="backdrop" [attr.r]="diameter"
+            [attr.cy]="center" [attr.cx]="center"
+            stroke-width="4" fill="none"></circle>
+    <circle id="progress" [style.animationDuration]="cycle + 'ms'"
+            [attr.cy]="center" [attr.cx]="center"
+            stroke-width="5" [attr.r]="diameter" fill="none"></circle>
+  </svg>
+</div>

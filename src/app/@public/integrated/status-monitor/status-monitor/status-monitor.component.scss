@@ -1,0 +1,90 @@
+@import "~src/app/@design/animation";
+
+$monitor-height: 18px;
+
+.status-box {
+  display: flex;
+  align-items: center;
+}
+
+.status-text {
+  width: 100px;
+  display: inline-block;
+  height: 20px;
+  margin-right: -10px;
+  line-height: 20px;
+  overflow: hidden;
+  padding: 0 6px;
+  font-size: 14px;
+}
+
+.status-monitor {
+  flex: 1;
+  height: $monitor-height;
+  border-radius: 16px;
+  padding: 2px;
+  position: relative;
+  box-shadow: inset 0 -1px rgba(255, 255, 255, 0.24), inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.mask{
+  $height: $monitor-height - 4;
+  width: 100%;
+  height: $height;
+  border-radius: $monitor-height;
+  position: relative;
+  padding: 0 1px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    z-index: 5;
+    border-radius: $height;
+    background: linear-gradient(
+        to bottom,
+        rgba(180,180,180,0.4) 0%,
+        rgba(180,180,180,0.25) 10%,
+        rgba(180,180,180,0.1) 40%,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0.1) 60%,
+        rgba(0,0,0,0.1) 65%,
+        rgba(255,255,255,0.2) 90%,
+        rgba(0,0,0,0.1) 95%,
+        rgba(0,0,0,0.1) 100%
+    ); /* W3C */
+    border-color: rgba(0, 0, 0, 0.2);
+    border-image: none;
+    border-style: solid;
+    border-width: 0;
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
+      0 2px 6px rgba(0, 0, 0, 0.5),
+      0 10px rgba(0, 0, 0, 0.05) inset;
+  }
+}
+
+.schedule {
+  width: 100%;
+  left: -100%;
+  height: $monitor-height - 6;
+  position: relative;
+  border-radius: $monitor-height - 6;
+  animation: move-beam 5s 0s infinite linear;
+}
+
+.schedule.uncertain{
+  transition: 300ms;
+  will-change: transform, opacity, background;
+}
+
+.schedule.dismiss{
+  opacity: 0;
+  transition: 500ms;
+}
+

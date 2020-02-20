@@ -1,0 +1,192 @@
+@charset "utf-8";
+@import "app/@design/default";
+
+@font-face {
+  font-family: Roboto;
+  src: url("assets/fonts/Roboto-Regular.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: Roboto;
+  src: url("assets/fonts/Roboto-Bold.ttf") format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ciphertext';
+  src: url("assets/fonts/triglavian-completed.otf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'screen';
+  src: url("assets/fonts/LCDM2B.ttf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'heading';
+  src: url("assets/fonts/critical-mass.ttf");
+  font-style: normal;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  font-size: 16px;
+  font-family:
+    -apple-system, Roboto,
+    "Helvetica Neue",
+    "Microsoft YaHei UI",
+    Hiragino Sans GB,
+    Helvetica, Arial,
+    sans-serif, nomospace;
+  font-style: normal;
+}
+
+body {
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  transition: 300ms;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html, body, .smallest {
+  min-width: $Breakpoint-lg;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+a {
+  transition: 150ms;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin: 0 0 16px 0;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+h1, .h1 {
+  font-size: 2.5rem;
+}
+
+h2, .h2 {
+  font-size: 2rem;
+}
+
+h3, .h3 {
+  font-size: 1.75rem;
+}
+
+h4, .h4 {
+  font-size: 1.5rem;
+}
+
+h5, .h5 {
+  font-size: 1.25rem;
+}
+
+h6, .h6 {
+  font-size: 1rem;
+}
+
+ul, ol, li, p {
+  margin-top: 0;
+  margin-bottom: 16px;
+  padding: 0;
+  list-style: none;
+}
+h1, h2, h3, h4, h5, h6, em, strong, cite {
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-auto {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 #{$i * 8.333333%};
+    max-width: #{$i * 8.333333%};
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}
+
+.asc-grid {
+  $gutters: 16px;
+  display: grid !important;
+  grid-gap: $gutters $gutters;
+  justify-content: center;
+  grid-auto-flow: row;
+  grid-template-columns: [start] repeat(6, 1fr) [center] repeat(6, 1fr) [end];
+}
+
+.asc-grid-full {
+  grid-column: start / end;
+}
+.asc-grid-half_1 {
+  grid-column: start / center;
+}
+.asc-grid-half_2 {
+  grid-column: center / end;
+}
+@for $i from 1 through 12 {
+  .asc-column--#{$i} {
+    grid-column: span $i
+  }
+}
+
+.asc-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  @media (min-width: $Breakpoint-lg) {
+    max-width: 1140px
+  }
+  @media (min-width: $Breakpoint-xl) {
+    max-width: 1260px
+  }
+}
+
+.asc-photo{
+  line-height: 0;
+}
+
+.asc-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.asc-buttons > button:not(:last-child) {
+  margin-right: 16px;
+}

@@ -1,0 +1,43 @@
+@import "~src/app/@design/default";
+
+$card-width: 800px;
+
+.card {
+  width: $card-width;
+  height: $card-width * 0.5;
+  display: flex;
+  border-radius: 5px;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  user-select: none;
+  position: relative;
+  z-index: $level-top + 1;
+  font-family: "ciphertext", "Royal Samurai", "Helvetica Neue", Helvetica, sans-serif;
+  writing-mode: vertical-lr;/*从左向右 从右向左是 writing-mode: vertical-rl;*/
+  writing-mode: tb-lr;
+}
+.content {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-icon{
+  font-size: 100px;
+}
+
+// 头部
+
+.card-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 16px;
+}

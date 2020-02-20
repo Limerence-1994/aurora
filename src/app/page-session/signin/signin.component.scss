@@ -1,0 +1,21 @@
+@import "~src/app/@design/default";
+
+$card-width: 800px;
+
+.signin {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  margin-top: -$nav-height;
+  min-height: 500px;
+  background-image: url("/assets/images/background/signin.jpeg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 32px;
+}
+.sign-content {
+  overflow: hidden;
+  max-height: 100%;
+}

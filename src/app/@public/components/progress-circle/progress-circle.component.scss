@@ -1,0 +1,57 @@
+.progress {
+  line-height: 0;
+}
+
+@function pi() {
+  @return 3.14159265359;
+}
+
+$radius: 15;
+$percent: 100;
+$circumference: (pi() * (2 * $radius));
+$stroke_percentage: $circumference - (($percent / 100) * $circumference);
+
+.progress.determinate {
+  transform: rotate(-90deg);
+  #progress {
+    stroke-dasharray: $circumference;
+    stroke-dashoffset: $circumference;
+    animation: progressAnimation1 16000ms linear forwards;
+    transition: stroke-dasharray 400ms linear;
+  }
+}
+
+@keyframes progressAnimation1 {
+  to {
+    stroke-dashoffset: $stroke_percentage;
+  }
+}
+
+.progress.indeterminate {
+  animation: rotate 2s linear infinite;
+  #progress {
+    stroke-dasharray: 100px;
+    stroke-dashoffset: 100px;
+    animation-name: progressAnimation2;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progressAnimation2 {
+  from {
+    stroke-dashoffset: 300px;
+  }
+  to {
+    stroke-dashoffset: 100px;
+  }
+}

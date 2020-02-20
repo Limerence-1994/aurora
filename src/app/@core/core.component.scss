@@ -1,0 +1,10 @@
+@import "../@design/default";
+.core {
+  width: 100%;
+  position: relative;
+  &-content {
+    height: 100vh;
+    overflow: auto;
+    padding-top: $nav-height;
+  }
+}

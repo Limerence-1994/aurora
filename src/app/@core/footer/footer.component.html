@@ -1,0 +1,81 @@
+<div class="footer-box">
+  <footer class="footer theme-backdrop-deep" [ngClass]="compassIsOpen ? 'open' : 'close'">
+    <div class="footer-beam" [ngClass]="mode">
+      <div class="asc-trapezoid theme-trapezoid footer-part left"></div>
+      <div class="asc-trapezoid theme-trapezoid footer-part right"></div>
+      <div class="lining theme-lining"></div>
+    </div>
+    <div class="asc-grid">
+      <div class="footer-content asc-column--4">
+        <div class="theme-lining footer-float left"></div>
+        <div class="logo">
+          <div class="asc-photo"><img src="assets/images/logo.png" alt=""></div>
+          <h2 class="title">Aurora</h2>
+          <button mat-icon-button
+                  class="theme-font-active button-open"
+                  (click)="toggleFooContent()">
+            <fa-icon [icon]="compassIsOpen ? 'times-circle' : 'compass'" size="2x"></fa-icon>
+          </button>
+        </div>
+        <aside class="footer-title--small" *ngIf="loadContent">
+          <div>
+            <p>
+              Humans use knowledge to understand things,
+              use practical activities to change things.
+              Use the former to master the universe,
+              and the latter to create the universe.
+            </p>
+            <hr>
+            <p>
+              除特别说明，本站内容默认采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+              知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+            </p>
+            <div class="asc-actions">
+              <div>
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" class="asc-middle">
+                  <img alt="知识共享许可协议" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"/>
+                </a>
+              </div>
+              <div>
+                <a mat-icon-button matTooltip="github" target="_blank"
+                   href="https://github.com/Limerlence-1994/aurora-community">
+                  <fa-icon [icon]="['fab', 'github']" size="lg"></fa-icon>
+                </a>
+                <button mat-icon-button matTooltip="weixin">
+                  <fa-icon [icon]="['fab', 'weixin']" size="lg"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="footer-content asc-column--8">
+        <div class="theme-lining footer-float right">
+          <div class="footer-copyright theme-font-default">
+            <span>Designed And Developed By <em>LEE</em></span>
+            <span>Copyright © 2099 &nbsp;<wbr>&nbsp;Aurora Reserved</span>
+          </div>
+        </div>
+        <div class="footer-list-box" *ngIf="loadContent">
+          <div
+            *ngFor="let name of footerName"
+            class="footer-list">
+            <h2 i18n>{{name | uppercase}}</h2>
+            <ul>
+              <li *ngFor="let item of footerData[name]">
+                <a [routerLink]="item.src" class="theme-link-hover">
+                <span class="list_icon">
+                  <fa-icon class="icon-hover" [icon]="item.icon"></fa-icon>
+                </span>
+                  {{item.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lining theme-lining bottom"></div>
+  </footer>
+</div>

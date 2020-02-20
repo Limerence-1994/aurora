@@ -1,0 +1,23 @@
+@keyframes move-beam {
+  0% {background-position: 0 0}
+  100%{background-position: 300px 0}
+}
+
+@keyframes move-beam-re {
+  0%{background-position: 0 0}
+  100%{background-position: -300px 0}
+}
+
+@keyframes rotate {
+  0%{transform: rotate(0)}
+  100% {transform: rotate(360deg)}
+}
+
+@keyframes flicker {
+  from {opacity: .5}
+  to {opacity: 1}
+}
+
+.move-background {
+  transform: translate3d(0, 2px, 0)
+}
