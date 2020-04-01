@@ -1,4 +1,4 @@
-@import "~src/app/@design/default";
+@import "src/app/@design/default";
 
 .error {
   z-index: $level-max;
@@ -6,13 +6,7 @@
   float: left;
   justify-content: flex-end;
   align-items: center;
-  // 背景
-  &-backend{
-    max-width: 100%;
-    padding: 1rem;
-    border-radius: 8px 8px 20px 8px;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-  }
+  transform: translate3d(0, 0, 0);
 }
 
 @mixin glitchCopy {

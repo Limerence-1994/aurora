@@ -8,3 +8,5 @@ export * from './app-mode/app-mode.service';
 export * from './theme/theme.service';
 export * from './scroll/scroll.service';
 export * from './site-meta/site-meta.service';
+export * from './storage/storage.service';
+export * from './settings/settings.service';

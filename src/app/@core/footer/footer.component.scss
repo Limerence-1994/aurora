@@ -1,4 +1,4 @@
-@import "~src/app/@design/default";
+@import "src/app/@design/default";
 
 $footer-height: 136px;
 $lining-height: 16px;
@@ -7,6 +7,21 @@ $part-width: 230px;
 .footer-box {
   position: relative;
   height: $footer-height;
+  opacity: 0;
+  &.open, &.simplify {
+    opacity: 1;
+  }
+  &.open {
+    .footer-part.left {
+      transition-delay: $time-detailed;
+      transform: translate3d($part-width, 0, 0);
+    }
+
+    .footer-part.right {
+      transition-delay: $time-detailed;
+      transform: translate3d(-$part-width, 0, 0);
+    }
+  }
 }
 
 .footer {
@@ -32,18 +47,6 @@ $part-width: 230px;
     position: relative;
   }
 
-  &-beam.open &-part {
-    &.left {
-      transition-delay: $time-detailed;
-      transform: translate3d($part-width, 0, 0);
-    }
-
-    &.right {
-      transition-delay: $time-detailed;
-      transform: translate3d(-$part-width, 0, 0);
-    }
-  }
-
   &-part {
     width: $part-width;
     height: $part-height;
@@ -56,11 +59,11 @@ $part-width: 230px;
     }
 
     &.left {
-      left: -$part-width;
+      left: -($part-width + 50);
     }
 
     &.right {
-      right: -$part-width;
+      right: -($part-width + 50);
     }
 
     &.left::before {
@@ -82,7 +85,7 @@ $part-width: 230px;
   &-float {
     position: absolute;
     height: $footer-height - ($lining-height * 2 + 2);
-    z-index: 0;
+    z-index: $level-low;
     width: calc(100% + 80px);
     transform: skewX(-45deg);
   }
@@ -135,6 +138,7 @@ $part-width: 230px;
     li {
       list-style-type: none;
       line-height: 36px;
+      margin: 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -151,16 +155,18 @@ $part-width: 230px;
   display: flex;
   align-items: center;
   position: relative;
-
+  z-index: $level-low;
   &, & img {
     height: $footer-height - $lining-height * 2;
   }
 }
 
 .title {
+  font-size: 1.5rem;
+  margin-bottom: 0;
   padding-left: $main-pd-right;
   font-family: 'heading', sans-serif;
-  @media (max-width: $Breakpoint-xl) {
+  @media (max-width: $Breakpoint-sl) {
     font-size: 1rem;
   }
   @media (max-width: $Breakpoint-lg) {

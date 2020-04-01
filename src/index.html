@@ -36,219 +36,77 @@
         href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
         integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y"
         crossorigin="anonymous">
-  <style>
-    @keyframes title {
-      0% {
-        opacity: 0;
-        transform: translate3d(-130px,0,0);
-      }
-
-      48% {
-        opacity: 0;
-        transform: translate3d(-130px,0,0);
-      }
-
-      52% {
-        opacity: 1;
-        transform: translate3d(-20px,0,0);
-      }
-
-      75% {
-        opacity: 1;
-        transform: translate3d(-10px,0,0);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translate3d(0,0,0);
-      }
+  <style id="ld-initStyle">
+    * {
+      box-sizing: border-box;
     }
-    @keyframes fade {
+    @keyframes rotate {
       0% {
-        opacity: 1;
+        transform: rotate(0deg);
       }
-
-      100% {
-        opacity: 0;
-      }
-    }
-    @keyframes bg {
-      0% {
-        background-color: #306f99;
-      }
-
       50% {
-        background-color: #19470f;
+        transform: rotate(180deg);
       }
-
-      90% {
-        background-color: #734a10;
-      }
-    }
-    @keyframes blink {
-      0% {
-        opacity: 0;
-      }
-
-      5% {
-        opacity: 1;
-      }
-
-      10% {
-        opacity: 0;
-      }
-
-      15% {
-        opacity: 1;
-      }
-
-      20% {
-        opacity: 0;
-      }
-
-      25% {
-        opacity: 1;
-      }
-
-      30% {
-        opacity: 0;
-      }
-
-      35% {
-        opacity: 1;
-      }
-
-      40% {
-        opacity: 0;
-        transform: translate3d(0,0,0);
-      }
-
-      45% {
-        opacity: 1;
-        transform: translate3d(-80px,0,0);
-      }
-
-      50% {
-        opacity: 0;
-        transform: translate3d(0,0,0);
-      }
-
-      51% {
-        transform: translate3d(0,0,0);
-      }
-
-      55% {
-        opacity: 1;
-      }
-
-      60% {
-        opacity: 0;
-      }
-
-      65% {
-        opacity: 1;
-      }
-
-      70% {
-        opacity: 0;
-      }
-
-      75% {
-        opacity: 1;
-      }
-
-      80% {
-        opacity: 0;
-      }
-
-      85% {
-        opacity: 1;
-      }
-
-      90% {
-        opacity: 0;
-        transform: translate3d(0,0,0);
-      }
-
-      95% {
-        opacity: 1;
-        transform: translate3d(-80px,0,0);
-      }
-
-      96% {
-        transform: translate3d(0,0,0);
-      }
-
       100% {
-        opacity: 0;
-        transform: translate3d(0,0,0);
+        transform: rotate(360deg);
       }
     }
-    #ld-container {
-      background: #2a2a2d;
-      color: #eaf7ff;
-      width:100%;
-      height:100%;
-      top:0;
-      left:0;
-      position:fixed;
-      z-index: 20;
-      transition: opacity 300ms;
-    }
-    .ld-wrap {
+    .ball-clip-rotate {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -80px;
-      margin-top: -40px;
+      right: 16px;
+      bottom: 16px;
+      color: white;
     }
-    .ld-bg {
-      padding: 30px 30px 30px 0;
-      background: #306f99;
-      animation: bg 1.5s linear infinite;
-      box-shadow: inset 0 0 45px 30px #2a2a2d;
+    .ball-clip-rotate span {
+      border: 2px solid white;
+      border-bottom-color: transparent;
+      height: 26px;
+      width: 26px;
+      background: transparent !important;
+      display: inline-block;
+      border-radius: 50%;
+      margin-bottom: -6px;
+      margin-right: 8px;
+      animation: rotate 0.75s 0s linear infinite;
     }
-    .loading {
-      position: relative;
-      text-align: right;
-      text-shadow: 0 0 6px #bce4ff;
-      height: 20px;
-      width: 150px;
+    #ld-container{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 5;
+      width: 100%;
+      height: 100vh;
+      background: #202124;
+      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .loading span {
-      display: block;
-      text-transform: uppercase;
-      position: absolute;
-      right: 30px;
-      height: 20px;
-      width: 200px;
-      line-height: 20px;
-    }
-    .loading span:after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -2px;
-      right: -21px;
-      height: 20px;
-      width: 16px;
-      background: #eaf7ff;
-      box-shadow: 0 0 15px #bce4ff;
-      animation: blink 3.4s infinite;
-    }
-    .loading span.ld-title {
-      animation: title 3.4s linear infinite;
-    }
-    .loading span.ld-text {
-      animation: title 3.4s linear 1.7s infinite;
-      opacity: 0;
+    #ld-text {
+      width: 50%;
+      height: 350px;
+      padding: 16px;
+      overflow: hidden;
+      color: rgba(255,255,255,0.8);
+      /*border: 1px solid #ccc;*/
     }
     .ld-hidden {
+      transition: 250ms;
       opacity: 0;
-      visibility: hidden;
       pointer-events: none;
     }
-
+    .ld-hidden #ld-text{
+      transition: 250ms;
+      transform: scaleY(0);
+    }
+    .ld-tag {
+      display: inline-block;
+      width: 100px;
+    }
+    .ld-success {color: #5fca4a}
+    .ld-error {color: #F44336}
   </style>
 </head>
 <body>
@@ -261,15 +119,10 @@
 </noscript>
 <app-root></app-root>
 <div id="ld-container">
-  <div class="ld-wrap">
-    <div class="ld-bg">
-      <div class="loading">
-        <span class="ld-title">loading</span>
-        <span class="ld-text">正在连接.....</span>
-      </div>
-    </div>
-  </div>
-  <div style="text-align:center;clear:both;"></div>
+  <ul id="ld-text">
+
+  </ul>
+  <div class="ball-clip-rotate"><span></span> LOADING...</div>
 </div>
 <script defer
         src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"

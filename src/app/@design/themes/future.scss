@@ -12,7 +12,7 @@ $background-float: lighten($background-base, 12%);
 
 $color: (
   main: #00e7ff,
-  secondary: #ffa500,
+  secondary: #ff9a03,
   activity: #FFE0B2,
   attention: #d7efff,
   success: #5fca4a,
@@ -113,6 +113,20 @@ $future: future-dark-theme($base-primary, $base-accent, $base-warn);
   text-shadow: 0 0 8px rgba(0, 112, 202, 0.75), 0 0 12px rgba(13, 71, 203, 0.57);
 }
 
+@mixin GridLines {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: $level-top;
+  background-image:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 2px, 2px 100%;
+}
+
 @include angular-material-theme($future);
 
 body {
@@ -123,7 +137,7 @@ body {
 // ------------------↓↓↓↓↓标签↓↓↓↓↓------------------
 //－－－－－链接
 a {
-  color: map-get($color, activity);
+  color: inherit;
 }
 
 .mat-tab-label {
@@ -131,7 +145,6 @@ a {
   opacity: .8;
 }
 
-a:hover,
 .theme-link-active,
 .mat-tab-label-active {
   @include Activity;
@@ -178,7 +191,7 @@ hr.dotted {
 
   &::-webkit-scrollbar {
     width: 12px;
-    background: url("~src/assets/images/compass.svg");
+    background: url("src/assets/images/compass.svg");
     background-size: 100%;
   }
 
@@ -204,6 +217,7 @@ hr.dotted {
   color: map-get($color, activity);
   display: inline-block;
   vertical-align: top;
+
   &::before {
     content: "";
     position: absolute;
@@ -308,6 +322,23 @@ hr.dotted {
   }
 }
 
+//－－－－－内圆角边框
+.theme-edge {
+  position: relative;
+  padding: 32px;
+  &::before{
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 25px solid #2a2a2d;
+    border-radius: 35px;
+    box-shadow: inset 2px 2px 2px #000, inset -1px -1px 2px rgba(255, 255, 255, 0.3);
+  }
+}
+
 //－－－－－分割线
 .theme-beam {
   background-image: repeating-linear-gradient(-45deg, rgba(black, 0), rgba(black, 0) 15px, rgba(black, 0.35) 15px, rgba(black, 0.35) 30px);
@@ -321,34 +352,39 @@ hr.dotted {
   overflow: hidden;
   background-color: whitesmoke !important;
   z-index: 1;
-  .title {
-    color: map-get($text-color, action);  //1
-    background-color: $background-secondary;//1
-  }
+
   &::before {
     content: "";
     display: block;
     height: 30%;
     width: 100%;
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
     z-index: $level-height;
     animation: Move-down infinite linear 5s;
-    background-image: linear-gradient(to bottom, rgba(white, 0), rgba(white, .35), rgba(white, 0));
+    background-image:
+      linear-gradient(to bottom, rgba(white, 0), rgba(white, .35), rgba(white, 0));
   }
+
+  &::after{
+    content: "";
+    @include GridLines;
+  }
+}
+
+//－－－－－次级导航栏
+.theme-secondary {
+  @include Shadow-float;
+  position: relative;
+  background-color: rgba(black, .25) !important;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
   &::after {
     content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    position: absolute;
-    z-index: $level-top;
-    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    background-size: 100% 2px, 2px 100%;
+    @include GridLines;
   }
 }
 
@@ -476,7 +512,7 @@ hr.dotted {
   @include Shadow-active;
   background-color: $background-float;
 }
-
+//－－－－－阴影
 .theme-shadow-card {
   @include Shadow-default
 }
@@ -485,8 +521,11 @@ hr.dotted {
   @include Shadow-float
 }
 
+.theme-shadow-polygon {
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+}
+
 .theme-shadow-concave {
-  background-color: rgba(black, .3);
   box-shadow: inset 2px 2px 2px #000, inset -1px -1px 2px rgba(255, 255, 255, 0.3);
 }
 

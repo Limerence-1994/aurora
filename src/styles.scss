@@ -8,7 +8,7 @@
   font-style: normal;
 }
 
-@font-face{
+@font-face {
   font-family: Roboto;
   src: url("assets/fonts/Roboto-Bold.ttf") format('truetype');
   font-weight: bold;
@@ -37,13 +37,12 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
   font-size: 16px;
-  font-family:
-    -apple-system, Roboto,
-    "Helvetica Neue",
-    "Microsoft YaHei UI",
-    Hiragino Sans GB,
-    Helvetica, Arial,
-    sans-serif, nomospace;
+  font-family: -apple-system, Roboto,
+  "Helvetica Neue",
+  "Microsoft YaHei UI",
+  Hiragino Sans GB,
+  Helvetica, Arial,
+  sans-serif, nomospace;
   font-style: normal;
 }
 
@@ -57,12 +56,13 @@ body {
 
 html, body {
   scroll-behavior: smooth;
+
   &::-webkit-scrollbar {
     display: none;
   }
 }
 
-html, body, .smallest {
+html, body, .smallest, .cdk-overlay-container {
   min-width: $Breakpoint-lg;
 }
 
@@ -108,14 +108,19 @@ h6, .h6 {
   font-size: 1rem;
 }
 
-ul, ol, li, p {
+ul, ol, li, p, .paragraph {
   margin-top: 0;
   margin-bottom: 16px;
   padding: 0;
   list-style: none;
 }
+
 h1, h2, h3, h4, h5, h6, em, strong, cite {
   font-weight: bold;
+}
+
+.small, small {
+  opacity: .8;
 }
 
 .row {
@@ -152,12 +157,15 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
 .asc-grid-full {
   grid-column: start / end;
 }
+
 .asc-grid-half_1 {
   grid-column: start / center;
 }
+
 .asc-grid-half_2 {
   grid-column: center / end;
 }
+
 @for $i from 1 through 12 {
   .asc-column--#{$i} {
     grid-column: span $i
@@ -176,7 +184,7 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
   }
 }
 
-.asc-photo{
+.asc-photo {
   line-height: 0;
 }
 

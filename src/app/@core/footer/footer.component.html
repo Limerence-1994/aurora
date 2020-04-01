@@ -1,6 +1,6 @@
-<div class="footer-box">
+<div class="footer-box" [ngClass]="mode">
   <footer class="footer theme-backdrop-deep" [ngClass]="compassIsOpen ? 'open' : 'close'">
-    <div class="footer-beam" [ngClass]="mode">
+    <div class="footer-beam">
       <div class="asc-trapezoid theme-trapezoid footer-part left"></div>
       <div class="asc-trapezoid theme-trapezoid footer-part right"></div>
       <div class="lining theme-lining"></div>
@@ -60,7 +60,7 @@
           <div
             *ngFor="let name of footerName"
             class="footer-list">
-            <h2 i18n>{{name | uppercase}}</h2>
+            <h3 i18n>{{name | uppercase}}</h3>
             <ul>
               <li *ngFor="let item of footerData[name]">
                 <a [routerLink]="item.src" class="theme-link-hover">

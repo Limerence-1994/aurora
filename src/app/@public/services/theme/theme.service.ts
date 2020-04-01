@@ -23,7 +23,7 @@ export class ThemeService {
       this.styleTag = this.document.createElement('link');
       this.styleTag.id = 'client-theme';
       this.styleTag.rel = 'stylesheet';
-      this.styleTag.href = `${styleName}`;
+      this.styleTag.href = `${styleName}.css`;
       this.headTag.appendChild(this.styleTag);
     }
     return new Promise((resolve, reject) => {

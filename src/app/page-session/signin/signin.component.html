@@ -1,6 +1,56 @@
-<div class="signin">
-  <pc-access-card title="&nbsp;">
-    <h2>Welcome Sign In</h2>
-    <p></p>
-  </pc-access-card>
-</div>
+
+<access-card title="&nbsp;" @component>
+  <access-card-head [icon]="icon">
+    <h2>欢迎登录</h2>
+    <div i18n>神圣的F2连接着我们</div>
+  </access-card-head>
+
+  <access-card-content>
+    <div class="signin-scroll" cdkScrollable>
+      <div class="signin-scroll-main">
+        <h5>快捷登录</h5>
+        <p class="options" innerHTML="<span>111</span>">
+          >>>
+          <span *ngFor="let brand of signInOptions">
+          <fa-icon [icon]="brand.icon" size="lg"></fa-icon>
+          [<span class="color-text_error">{{brand.tag}}</span>]{{brand.name}}
+        </span>
+        </p>
+        <h5>其他选项</h5>
+        <p class="options">
+          >>>
+          <a routerLink="">[<span class="color-text_error">N</span>]新建账号</a>
+          <a routerLink="">[<span class="color-text_error">L</span>]忘记账号</a>
+          <a routerLink="">[<span class="color-text_warn">B</span>]返回上页</a>
+        </p>
+        <div class="paragraph">
+          <span>输入用户账户或名称快捷登录(如google或g), 不区分大小写:</span>
+          <form class="input" (ngSubmit)="checkAccount()">
+            <label for="signin-account">[root@Ac~]#</label>
+            <input autofocus
+                   [(ngModel)]="account"
+                   class="input-text"
+                   id="signin-account"
+                   name="account"
+                   type="text">
+          </form>
+        </div>
+        <ng-container [ngSwitch]="step">
+          <div class="paragraph" *ngSwitchCase="'password'">
+            <span>输入账户密码:</span>
+            <form class="input" (ngSubmit)="checkAccount()">
+              <label for="signin-password">[root@Pw~]#</label>
+              <input autofocus
+                     [(ngModel)]="password"
+                     class="input-text"
+                     id="signin-password"
+                     name="account"
+                     type="password">
+            </form>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </access-card-content>
+</access-card>
+

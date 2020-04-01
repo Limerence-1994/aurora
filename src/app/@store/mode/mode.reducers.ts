@@ -1,10 +1,11 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { update, reset, ModeProps } from '../actions/mode.actions';
+import { update, reset, ModeProps } from './mode.actions';
 import { ModeState, ModeStateEnum } from '../../@models/mode.model';
 
-export const initialState: ModeState = ModeStateEnum.INITIAL;
+const initialState: ModeState = ModeStateEnum.INITIAL;
 
-const _modeReducer = createReducer<ModeState>(initialState,
+const _modeReducer = createReducer<ModeState>(
+  initialState,
   on(update, (_, { payload }: ModeProps) => payload),
   on(reset, () => ModeStateEnum.CLOSE),
 );

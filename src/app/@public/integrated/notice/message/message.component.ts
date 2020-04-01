@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, Inject} from '@angular/core';
+import {Component, Inject, ViewEncapsulation} from '@angular/core';
 import {noticeAnimation} from '../../../../@design/animations';
 import {ASC_NOTICE_DATA, MessageData, NoticeConfig} from '../notice.config';
 import {NoticeRef} from '../notice.ref';
@@ -26,15 +26,21 @@ export class MessageComponent {
     this.textButton = typeof this.data.action === 'string';
   }
 
-  endOfAnimation(e) {
-    const {fromState, toState} = e;
-    if ((toState === 'void' && fromState !== 'void') || toState === 'hidden') {
+  /**
+   * 动画结束时删除
+   * @param fromState 从 a 开始
+   * @param toState   到 b 的状态转换
+   */
+  endOfAnimation({fromState, toState}) {
+    if (!fromState && toState === 'hidden') {
       this.noticeRef.dismiss();
     }
   }
-
-  shutdown(r = false) {
-    this.noticeRef.sendUserAction(r);
+  // 结束时通知用户， 并开始动画
+  shutdown(choice?: boolean) {
+    if (choice !== undefined) {
+      this.noticeRef.sendUserAction(choice);
+    }
     this.animationState = 'hidden';
   }
 }

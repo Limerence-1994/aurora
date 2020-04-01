@@ -7,6 +7,7 @@
           *ngFor="let link of navigation"
           [label]="link.name"
           [routerLink]="link.src"
+          [mouseEvent]="tabEnterEvent(link.name)"
           routerLinkActive="routerLinkActive"
         ></app-router-nav-item>
       </app-router-nav>
@@ -21,3 +22,21 @@
     </div>
   </div>
 </header>
+<!--次级导航-->
+<div class="header-secondary" [class.open]="getSecondaryMode() | async">
+  <div class="content theme-secondary"
+       (mouseenter)="changeSecondaryNav($event.type)"
+       (mouseleave)="changeSecondaryNav($event.type)">
+    <div class="main">
+      <div class="step-name theme-backdrop-primary"></div>
+      <div class="step-content theme-edge">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--搜索框-->
+
+<div class="search-box">
+
+</div>

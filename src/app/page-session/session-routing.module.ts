@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SessionComponent } from './session.component';
-import { SigninComponent } from './signin/signin.component';
+import { SignInContainerComponent } from './signin/signin.component';
 import { SignoutComponent } from './signout/signout.component';
 
 export const routes: Routes = [
@@ -12,14 +12,14 @@ export const routes: Routes = [
   },
   {
     path: 'signin',
-    component: SigninComponent,
+    component: SignInContainerComponent,
     data: { identifier: 'sign in' }
   },
   {
     path: 'signout',
     component: SignoutComponent,
     data: { identifier: 'sign out' }
-  }
+  },
 ];
 
 @NgModule({

@@ -8,7 +8,7 @@
   z-index: 10;
   transition: $time-detailed $easing-tans;
   will-change: transform;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, -105%, 0);
   &-lining {
     height: $curtain-height
   }
@@ -34,6 +34,7 @@
     }
   }
   &.close {
+    transform: translate3d(0, 0, 0);
     transition-delay: $time-complex;
   }
   &.open {
@@ -60,6 +61,7 @@ $gap: $part-height / 2;
   transition: $time-detailed $easing-tans;
   will-change: transform;
   border-top: 1px solid black;
+  transform: translate3d(0, calc(100% + 5rem), 0);
   &.close{
     transition-delay: $time-complex;
     transform: translate3d(0, 0, 0);

@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, ContentChildren,
+import {
+  AfterViewInit, Component, ContentChildren,
   Directive, Input, OnDestroy, QueryList, ViewChild,
-  ViewChildren, ViewEncapsulation } from '@angular/core';
+  ViewChildren, ViewEncapsulation
+} from '@angular/core';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { NavigationEnd, Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -31,7 +33,7 @@ export class RouterTabDirective {
 export class RouterNavItemComponent {
 
   @Input()
-  public routerLink: RouterLink;
+  public routerLink: any[] | string;
 
   @Input()
   public routerLinkActiveOptions: {
@@ -41,7 +43,11 @@ export class RouterNavItemComponent {
   @Input()
   public label: string;
 
+  @Input()
+  public mouseEvent: (type: string) => void;
+
   constructor() {}
+
 }
 
 /**
@@ -72,11 +78,11 @@ export class RouterNavComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    // Remove tab click event
+    // 移除tab点击事件
     this.matTabGroup._handleClick = () => { };
-    // Select current tab depending on url
+    // 根据网址选择当前标签
     this.setIndex();
-    // Subscription to navigation change
+    // 订阅导航更改
     this.subscription.add(this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.setIndex();

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import {StatusMonitorService} from '../@public/integrated/status-monitor';
 import {ModeState, ModeStateEnum} from '../@models/mode.model';
 import {filter, map, mergeMap, tap} from 'rxjs/operators';
@@ -12,6 +12,8 @@ import {
   RouteConfigLoadStart
 } from '@angular/router';
 import {Subscription} from 'rxjs';
+import {DOCUMENT} from '@angular/common';
+import {NoticeService} from '../@public/integrated/notice';
 
 @Component({
   selector: 'app-core',
@@ -31,21 +33,18 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
     private scroll: ScrollService,
     private activatedRoute: ActivatedRoute,
     private modeService: AppModeService,
-    private changeRef: ChangeDetectorRef,
-    private statusMonitor: StatusMonitorService
-  ) {
-  }
+    private statusMonitor: StatusMonitorService,
+  ) {}
 
   ngAfterViewInit(): void {
     this.scroll.start(this.container);
   }
 
   ngOnInit() {
-
+    console.log('core init');
     this.subscriber.push(
       this.modeService.getModeStatus().subscribe(r => {
         this.mode = r;
-        this.changeRef.detectChanges();
       }),
 
       this.scroll.directionNotice()

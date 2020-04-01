@@ -1,4 +1,4 @@
-@import "~src/app/@design/default";
+@import "src/app/@design/default";
 
 $card-width: 800px;
 
@@ -8,7 +8,7 @@ $card-width: 800px;
   overflow: hidden;
   margin-top: -$nav-height;
   min-height: 500px;
-  background-image: url("/assets/images/background/signin.jpeg");
+  background-image: url("src/assets/images/background/signin.jpeg");
   background-size: cover;
   display: flex;
   align-items: center;
@@ -18,4 +18,28 @@ $card-width: 800px;
 .sign-content {
   overflow: hidden;
   max-height: 100%;
+}
+.options > *{
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.signin-scroll {
+  height: 232px;
+  overflow: hidden;
+}
+.signin-scroll-main {
+  height: 500px;
+}
+.input {
+  display: flex;
+}
+
+.input-text {
+  margin-left: 16px;
+  flex: 1;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: none;
 }

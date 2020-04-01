@@ -51,7 +51,7 @@ export class FooterComponent implements OnInit {
 
 
 const aboutData = {
-  club: [
+  community: [
     {
       name: 'Administrator',
       src: '/administrator',
@@ -83,18 +83,6 @@ const aboutData = {
       icon: 'dungeon'
     }
   ],
-  contact: [
-    {
-      name: 'Message Board',
-      src: '/about/message_board',
-      icon: 'comment-alt'
-    },
-    {
-      name: 'Station Letter',
-      src: '/station_letter',
-      icon: 'envelope'
-    }
-  ],
   attention: [
     {
       name: 'Development Log',
@@ -116,5 +104,27 @@ const aboutData = {
       src: '/about/links',
       icon: 'link'
     }
-  ]
+  ],
+  support: [
+    {
+      name: 'Message Board',
+      src: '/about/message_board',
+      icon: 'comment-alt'
+    },
+    {
+      name: 'Contact Us',
+      src: '/contact',
+      icon: 'envelope'
+    },
+    {
+      name: 'Privacy Policy',
+      src: '/privacy',
+      icon: 'envelope'
+    },
+    {
+      name: 'Terms of Service',
+      src: '/terms',
+      icon: 'envelope'
+    }
+  ],
 };

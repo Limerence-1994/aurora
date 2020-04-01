@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export type ProgressMode = 'determinate' | 'indeterminate';
 
 @Component({
-  selector: 'pc-progress-circle',
+  selector: 'progress-circle',
   templateUrl: './progress-circle.component.html',
   styleUrls: ['./progress-circle.component.scss']
 })

@@ -7,8 +7,8 @@ export interface ModeProps {
 }
 // 动作类型
 export enum ModeActionType {
-  UPDATE    = '[Mode Component] Update',
-  RESET     = '[Mode Component] Reset'
+  UPDATE    = '[Mode] Update',
+  RESET     = '[Mode] Reset'
 }
 
 export const update   = createAction(ModeActionType.UPDATE, props<ModeProps>());

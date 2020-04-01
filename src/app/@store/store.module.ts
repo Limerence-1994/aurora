@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule as ngrxStoreModule } from '@ngrx/store';
-import { metaReducers, reducers } from './reducers';
+import { metaReducers, reducers } from './index';
 
 @NgModule({
   declarations: [],

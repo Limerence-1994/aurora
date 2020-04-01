@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ModeState } from '../../../@models/mode.model';
 import { Observable } from 'rxjs';
-import { reset, update } from '../../../@store/actions/mode.actions';
+import { reset, update } from '../../../@store/mode/mode.actions';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({

@@ -17,13 +17,13 @@
     "directive-selector": [
       true,
       "attribute",
-      ["app", "core", "pc"],
+      ["app", "core", ""],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      ["app", "core", "pc"],
+      ["app", "core", ""],
       "kebab-case"
     ],
     "import-blacklist": [

@@ -5,7 +5,10 @@
            [label]="tab.routerLink"
            [routerLinkActiveOptions]="tab.routerLinkActiveOptions">
     <ng-template mat-tab-label>
-      <a class="router-tab-link" [routerLink]="tab.routerLink"></a>
+      <a class="router-tab-link"
+         (mouseenter)="tab.mouseEvent($event.type)"
+         (mouseleave)="tab.mouseEvent($event.type)"
+         [routerLink]="tab.routerLink"></a>
       {{ tab.label }}
     </ng-template>
   </mat-tab>
