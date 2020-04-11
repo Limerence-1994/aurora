@@ -6,7 +6,7 @@ import { StatusMonitorModule } from '../@public/integrated/status-monitor/status
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
+import { FormsModule } from '@angular/forms';
 import { CoreComponent } from './core.component';
 import { HeaderComponent } from './header/header.component';
 import { CurtainWallComponent } from './curtain-wall/curtain-wall.component';
@@ -33,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     RouterNavModule,
     MatButtonModule,
     MatTooltipModule,

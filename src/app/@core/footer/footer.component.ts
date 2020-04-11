@@ -16,13 +16,16 @@ export class FooterComponent implements OnInit {
   footerData = aboutData;
   footerName = Object.keys(aboutData);
 
-  constructor(private cdr: ChangeDetectorRef, private scroll: ScrollService) {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private scroll: ScrollService) {
   }
 
   ngOnInit() {
     this.scroll.alreadyEndNotice().subscribe(r => {
       if (!r) {
         this.hideFooter();
+        this.cdr.detectChanges();
       }
     });
   }

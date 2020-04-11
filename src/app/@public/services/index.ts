@@ -10,3 +10,4 @@ export * from './scroll/scroll.service';
 export * from './site-meta/site-meta.service';
 export * from './storage/storage.service';
 export * from './settings/settings.service';
+export * from './worker/workers.service';

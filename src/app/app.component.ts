@@ -9,7 +9,10 @@ import {select, Store} from '@ngrx/store';
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(@Inject(DOCUMENT) private document: Document, store: Store<any>) {
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private store: Store<any>,
+  ) {
     store.pipe(select('settings')).subscribe(r => {
       console.log('设置更新：', r);
     });

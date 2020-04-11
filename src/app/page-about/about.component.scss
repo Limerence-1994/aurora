@@ -1,3 +1,11 @@
+@import "src/app/@design/default";
 .about {
-  height: 5000px;
+  height: 1000px;
+}
+
+.first {
+  height: calc(100vh - 200px);
+  min-height: 750px;
+  background: white url("src/assets/images/background/036b0f36.jpg") center right no-repeat;
+  background-size: 35% auto;
 }

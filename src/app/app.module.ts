@@ -9,6 +9,8 @@ import { CoreModule } from './@core/core.module';
 import { StoreModule } from './@store/store.module';
 import { NoticeModule } from './@public/integrated/notice/notice.module';
 import { InitializeService } from './@initialize/initialize.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export function InitServiceFactory(initService: InitializeService): () => void {
   return () => initService.load();
@@ -26,6 +28,7 @@ export function InitServiceFactory(initService: InitializeService): () => void {
     CoreModule,
     NoticeModule,
     AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     InitializeService,

@@ -51,7 +51,7 @@ $part-width: 230px;
     width: $part-width;
     height: $part-height;
     position: absolute;
-    top: -($part-height + 1);
+    top: -$part-height;
     transition: $time-complex $easing-tans;
 
     &.left::after, &.right::before {

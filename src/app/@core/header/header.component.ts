@@ -1,8 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ModeState} from '../../@models/mode.model';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
 
 const navigation: HeadItem[] = [
   {
@@ -39,12 +38,16 @@ const navigation: HeadItem[] = [
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 
   @Input() mode: ModeState;
 
+  @ViewChild('search') searchInput: ElementRef;
+
   public navigation = navigation;
+  public openSearch = false;
   private openSecondary: Subject<boolean> = new Subject();
   private timer;
   constructor(private router: Router) {}
@@ -74,6 +77,18 @@ export class HeaderComponent implements OnInit {
 
   tabEnterEvent(label: string) {
     return label === 'Forum' ? this.changeSecondaryNav.bind(this) : () => null;
+  }
+
+  toggleSearchBox() {
+    this.openSearch = !this.openSearch;
+    if (this.openSearch) {
+      this.searchInput.nativeElement.focus();
+    }
+  }
+
+  startSearch(event) {
+    console.log(event);
+    return false;
   }
 }
 

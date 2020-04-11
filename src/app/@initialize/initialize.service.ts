@@ -2,8 +2,8 @@ import {Inject, Injectable} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {ThemeService} from '../@public/services';
-import {SettingsService} from '../@public/services/settings/settings.service';
-import {StorageService} from '../@public/services/storage/storage.service';
+import {SettingsService} from '../@public/services';
+import {StorageService} from '../@public/services';
 
 @Injectable()
 export class InitializeService {

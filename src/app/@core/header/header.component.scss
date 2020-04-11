@@ -1,7 +1,6 @@
 @import "../../@design/default";
 
-.header {
-  padding: 0 32px;
+.navigation {
   position: fixed;
   z-index: $level-max;
   top: 0;
@@ -16,6 +15,12 @@
   &.simplify, &.initial, &.close {
     transform: translate3d(0, calc(-100% + 2px), 0)
   }
+}
+
+.header {
+  padding: 0 32px;
+  height: 100%;
+  width: 100%;
   &-content {
     display: flex;
     align-items: center;
@@ -24,11 +29,6 @@
     text-align: right;
     white-space: nowrap;
   }
-}
-
-
-.nav {
-  //padding-top: 2px;
 }
 
 .header-secondary {
@@ -66,4 +66,40 @@
 .step-content {
   flex: 1;
   position: relative;
+}
+
+.search-box {
+  position: absolute;
+  right: 32px;
+  bottom: -$nav-height;
+  z-index: -1;
+  transform: translate3d(0, -$nav-height, 0);
+  transition: $easing-tans $time-popup-fadeout;
+  &.open {
+    transform: translate3d(0, 0, 0);
+    transition: $easing-tans $time-popup-fadein;
+  }
+}
+.search {
+  width: 320px;
+  height: $nav-height;
+  border-radius: 5px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  label {
+    margin-right: 6px;
+    flex: 1;
+  }
+  input {
+    outline: none;
+    background: rgba(black, .3);
+    width: 100%;
+    border: 1px solid burlywood;
+    border-left: none;
+    border-right: none;
+    padding: 6px;
+    color: #00e7ff;
+  }
+  //z-index: $level-negative;
 }
