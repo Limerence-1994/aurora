@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PagePopupService } from '../@public/integrated/popup/popup.service';
-import { ErrorsComponent } from './errors.component';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {PopupService} from '../@public/services/popup/popup.service';
+import {ErrorsComponent} from './errors.component';
+import {PopupRef} from '../@public/services/popup/popup.ref';
 
 @Component({
   selector: 'app-error',
@@ -8,13 +9,19 @@ import { ErrorsComponent } from './errors.component';
 })
 export class ErrorContainerComponent implements OnInit, OnDestroy {
 
-  constructor(private popup: PagePopupService) { }
+  private popupRef: PopupRef<ErrorsComponent>;
+
+  constructor(private popup: PopupService) {
+  }
 
   ngOnInit() {
-    this.popup.open(ErrorsComponent, {code: 404, info: '请求的页面不存在或已经失效'});
+    this.popupRef = this.popup.open(
+      ErrorsComponent,
+      {code: 404, info: '请求的页面不存在或已经失效'}
+    );
   }
 
   ngOnDestroy(): void {
-    this.popup.close();
+    this.popupRef.close();
   }
 }

@@ -1,0 +1,10 @@
+@import "src/app/@design/default";
+
+.search-result {
+  $width: 500px;
+  width: $width;
+  height: 100vh;
+  padding: 16px;
+  margin-right: -16px;
+  z-index: $level-default;
+}

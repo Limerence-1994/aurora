@@ -1,0 +1,32 @@
+<div class="search-box theme-shadow-float" [class.open]="openSearch">
+  <form (ngSubmit)="searchFormSubmit($event)">
+    <div class="theme-backdrop-primary search"
+         matAutocompleteOrigin
+         #origin="matAutocompleteOrigin">
+      <label>
+        <input #search
+               matInput
+               type="text"
+               name="search"
+               [formControl]="searchValue"
+               [matAutocomplete]="auto"
+               [matAutocompleteConnectedTo]="origin">
+      </label>
+      <button mat-button
+              showProgress
+              type="submit"
+              #searchButton
+              (click.status)="startSearch($event)"
+              class="theme-status-progress" i18n>search</button>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let state of states" [value]="state.name">
+            <span class="asc-photo">
+              <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
+            </span>&nbsp;
+          <span>{{state.name}}</span> |
+          <small>Population: {{state.population}}</small>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </form>
+</div>

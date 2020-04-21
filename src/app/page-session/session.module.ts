@@ -8,7 +8,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatButtonModule } from '@angular/material/button';
 import { CardModule } from '../@public/components/card/card.module';
 
-import { PagePopupModule } from '../@public/integrated/popup/popup.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SessionRoutingModule } from './session-routing.module';
 
@@ -23,7 +22,6 @@ import { SessionRoutingModule } from './session-routing.module';
     CommonModule,
     FormsModule,
     CardModule,
-    PagePopupModule,
     MatButtonModule,
     ScrollingModule,
     FontAwesomeModule,

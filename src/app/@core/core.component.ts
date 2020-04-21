@@ -10,6 +10,7 @@ import {
 import {
   Router,
   ActivatedRoute,
+  NavigationStart,
   NavigationEnd,
   NavigationError,
   RouteConfigLoadEnd,
@@ -30,8 +31,7 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('cdRef')
   public container: ElementRef;
-
-  public mode: ModeState;
+  mode: ModeState;
   private subscriber: Subscription[] = [];
 
   constructor(
@@ -97,7 +97,9 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   navigateStatus(event) {
-    // FIXME: 有时此处会执行两次， 建议留意如何判断懒加载第一次执行
+    if (event instanceof NavigationStart) {
+      ScrollService.scrollToTop();
+    }
     if (event instanceof RouteConfigLoadStart) {
       this.statusMonitor.uncertain('navigate');
     }

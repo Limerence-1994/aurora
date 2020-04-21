@@ -1,0 +1,42 @@
+@import "src/app/@design/default";
+
+.search-box {
+  position: absolute;
+  right: 32px;
+  bottom: -$nav-height;
+  z-index: -1;
+  transform: translate3d(0, -$nav-height, 0);
+  transition: $easing-tans $time-popup-fadeout;
+  &.open {
+    transform: translate3d(0, 0, 0);
+    transition: $easing-tans $time-popup-fadein;
+  }
+}
+.search {
+  width: 320px;
+  height: $nav-height;
+  border-radius: 5px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  label {
+    margin-right: 6px;
+    flex: 1;
+  }
+  input {
+    outline: none;
+    background: rgba(black, .3);
+    width: 100%;
+    border: 1px solid burlywood;
+    border-left: none;
+    border-right: none;
+    padding: 6px;
+    color: #00e7ff;
+  }
+  //z-index: $level-negative;
+}
+
+@keyframes move-beam {
+  0% {background-position: 0 0}
+  100%{background-position: 100% 0}
+}

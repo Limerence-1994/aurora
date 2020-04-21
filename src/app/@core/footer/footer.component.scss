@@ -8,6 +8,7 @@ $part-width: 230px;
   position: relative;
   height: $footer-height;
   opacity: 0;
+  z-index: $level-max;
   &.open, &.simplify {
     opacity: 1;
   }

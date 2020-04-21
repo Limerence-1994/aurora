@@ -186,6 +186,7 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
 
 .asc-photo {
   line-height: 0;
+  vertical-align: middle;
 }
 
 .asc-actions {
@@ -197,4 +198,27 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
 
 .asc-buttons > button:not(:last-child) {
   margin-right: 16px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.app-overlay-container {
+  position: fixed;
+  z-index: $level-top;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: $Breakpoint-lg;
+  pointer-events: none;
+  .cdk-global-overlay-wrapper {
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
 }

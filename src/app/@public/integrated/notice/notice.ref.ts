@@ -22,6 +22,7 @@ export class NoticeRef<T> {
       this.container.remove(inView);
       this.noticeElement.destroy();
       this._afterClose$.complete();
+      this._userAction$.complete();
     }
   }
 

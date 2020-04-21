@@ -1,11 +1,23 @@
 @import "src/app/@design/default";
 .about {
-  height: 1000px;
+  background: fixed url("src/assets/images/background/about-join.jpg") no-repeat center;
+  background-size: cover;
+  .content {
+    height: 3000px;
+    padding: 16px;
+  }
+  &-footer{
+    height: 64px;
+  }
 }
 
 .first {
   height: calc(100vh - 200px);
-  min-height: 750px;
+  min-height: 700px;
   background: white url("src/assets/images/background/036b0f36.jpg") center right no-repeat;
-  background-size: 35% auto;
+  background-size: 500px auto;
+}
+
+.join {
+  height: 360px;
 }

@@ -21,7 +21,6 @@ export class ScrollService {
   // global
   static scrollToTop() {
     window.scrollTo(0, 0);
-    // document.body.scrollIntoView({block: 'start', behavior: 'smooth'});
   }
 
   constructor(private scrollDispatcher: ScrollDispatcher) {}

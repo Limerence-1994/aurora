@@ -19,9 +19,13 @@ $main-pd-right: 16px;
 $angle-width: 30px;
 $part-height: 28px;
 // 动画
+//大型
 $time-large: 750ms;
+//详情
 $time-detailed: 500ms;
+//稍微复杂
 $time-complex: 200ms;
+//简单
 $time-simple: 100ms;
 $time-popup-fadein: 150ms;
 $time-popup-fadeout: 75ms;
@@ -33,7 +37,7 @@ $easing-enter: cubic-bezier(0.0, 0.0, 0.2, 1);
 $easing-leave: cubic-bezier(0.4, 0.0, 1, 1);
 
 // 层级
-$level-max: 15; // 浮动层
+$level-max: 15; // 最高
 $level-top: 10; // fixed定位
 $level-height: 8; // 高层
 $level-default: 5; // 屏幕内 超出普通内容

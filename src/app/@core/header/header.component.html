@@ -15,13 +15,13 @@
       </div>
       <div class="col-2 action asc-buttons">
         <button mat-icon-button (click)="userSession()">
-          <fa-icon size="lg" icon="sign-in-alt"></fa-icon>
+          <fa-icon class="icon" size="lg" icon="sign-in-alt"></fa-icon>
         </button>
         <button mat-icon-button>
-          <fa-icon size="lg" icon="bell"></fa-icon>
+          <fa-icon class="icon" size="lg" icon="bell"></fa-icon>
         </button>
         <button mat-icon-button (click)="toggleSearchBox()">
-          <fa-icon size="lg" icon="search"></fa-icon>
+          <fa-icon class="icon" size="lg" icon="search"></fa-icon>
         </button>
         <button mat-icon-button><fa-icon size="lg" icon="expand"></fa-icon></button>
       </div>
@@ -29,20 +29,12 @@
   </header>
 
   <!--搜索框-->
-  <div class="search-box theme-shadow-float" [class.open]="openSearch">
-    <form (ngSubmit)="startSearch($event.value)">
-      <div class="theme-backdrop-primary search">
-          <label>
-            <input #search type="text" (blur)="toggleSearchBox()">
-          </label>
-          <button mat-button type="submit">search</button>
-      </div>
-    </form>
-  </div>
+  <core-search [openSearch]="openSearch"></core-search>
 </div>
 
+
 <!--次级导航-->
-<div class="header-secondary" [class.open]="getSecondaryMode() | async">
+<div class="header-secondary" [class.open]="openSecondary | async">
   <div class="content theme-secondary"
        (mouseenter)="changeSecondaryNav($event.type)"
        (mouseleave)="changeSecondaryNav($event.type)">

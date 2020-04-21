@@ -6,11 +6,12 @@ import { StatusMonitorModule } from '../@public/integrated/status-monitor/status
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreComponent } from './core.component';
 import { HeaderComponent } from './header/header.component';
 import { CurtainWallComponent } from './curtain-wall/curtain-wall.component';
 import { FooterComponent } from './footer/footer.component';
+import { EventMethodsModule } from '../@public/directive/event-methods/event-methods.module';
 
 import { faGithub, faWeixin } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -22,6 +23,10 @@ import {
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { SearchComponent } from './search/search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -29,17 +34,23 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HeaderComponent,
     CurtainWallComponent,
     FooterComponent,
+    SearchComponent,
+    SearchResultComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
+    EventMethodsModule,
+    MatInputModule,
     RouterNavModule,
     MatButtonModule,
     MatTooltipModule,
     ScrollingModule,
     FontAwesomeModule,
-    StatusMonitorModule
+    StatusMonitorModule,
+    MatAutocompleteModule,
   ],
   exports: [
     CoreComponent

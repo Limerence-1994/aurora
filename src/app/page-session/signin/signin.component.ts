@@ -7,7 +7,8 @@ import {faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import {faGoogle, faWeixin, faQq, faGithub, faFacebook} from '@fortawesome/free-brands-svg-icons';
 import {slideInto} from '../../@design/animations';
 import {IconDefinition} from '@fortawesome/fontawesome-svg-core';
-import {PagePopupService} from '../../@public/integrated/popup/popup.service';
+import {PopupService} from '../../@public/services/popup/popup.service';
+import {ComponentAnimation} from '../../@extends/components';
 
 const options = [
   {name: 'oogle', tag: 'G', icon: faGoogle},
@@ -23,19 +24,21 @@ const options = [
   styleUrls: ['./signin.component.scss'],
 })
 export class SignInContainerComponent implements OnInit, OnDestroy {
+
+  private popupRef;
+
   constructor(
-    private popup: PagePopupService,
+    private popup: PopupService,
     private mode: AppModeService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.mode.update(ModeStateEnum.SIMPLIFY);
-    this.popup.open(SignInComponent);
+    this.popupRef = this.popup.open(SignInComponent);
   }
 
   ngOnDestroy(): void {
-    this.popup.close();
+    this.popupRef.close();
   }
 }
 
@@ -46,27 +49,24 @@ export class SignInContainerComponent implements OnInit, OnDestroy {
   styleUrls: ['./signin.component.scss'],
   animations: [slideInto]
 })
-export class SignInComponent implements OnDestroy {
+export class SignInComponent extends ComponentAnimation implements OnDestroy {
 
   @ViewChild(CdkScrollable) content: CdkScrollable;
-  @HostBinding('@component') side = `{value: in, params: {
-    ENTRY_FROM: "translate3d(100%, 0, 0)",
-    ENTRY_TO: "translate3d(0, 0, 0)"}}`;
 
   private position = 0;
   icon: IconDefinition = faSignInAlt;
   signInOptions = options;
-  step = '';
-  account: string;
+  step    = '';
+  account = '';
   password: string;
 
-  constructor(public location: Location) { }
+  constructor(public location: Location) {
+    super();
+    super.setEnter('translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)')
+  }
 
   ngOnDestroy(): void {
-    console.log('卸载');
-    this.side = `{value: out, params: {
-      LEAVE_FROM: "translate3d(0, 0, 0)",
-      LEAVE_TO: "translate3d(100%, 0, 0)"`;
+    super.setLeave('translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)')
   }
 
   checkAccount() {

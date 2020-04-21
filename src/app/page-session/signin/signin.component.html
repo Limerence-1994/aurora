@@ -9,9 +9,8 @@
     <div class="signin-scroll" cdkScrollable>
       <div class="signin-scroll-main">
         <h5>快捷登录</h5>
-        <p class="options" innerHTML="<span>111</span>">
-          >>>
-          <span *ngFor="let brand of signInOptions">
+        <p class="options">
+          >>><span *ngFor="let brand of signInOptions">
           <fa-icon [icon]="brand.icon" size="lg"></fa-icon>
           [<span class="color-text_error">{{brand.tag}}</span>]{{brand.name}}
         </span>
@@ -21,7 +20,7 @@
           >>>
           <a routerLink="">[<span class="color-text_error">N</span>]新建账号</a>
           <a routerLink="">[<span class="color-text_error">L</span>]忘记账号</a>
-          <a routerLink="">[<span class="color-text_warn">B</span>]返回上页</a>
+          <a (click)="location.back()">[<span class="color-text_warn">B</span>]返回上页</a>
         </p>
         <div class="paragraph">
           <span>输入用户账户或名称快捷登录(如google或g), 不区分大小写:</span>

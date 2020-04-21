@@ -1,7 +1,69 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostListener, Input, OnInit} from '@angular/core';
 import {ModeState} from '../../@models/mode.model';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class HeaderComponent implements OnInit {
+  private timer;
+
+  @Input() mode: ModeState;
+  openSearch: boolean;
+
+  navigation      = navigation;
+  openSecondary: Subject<boolean> = new Subject();
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+  }
+
+  @HostListener('click', ['$event'])
+  headerClick($event) {
+    // 阻止在导航栏的点击事件冒泡
+    $event.stopPropagation();
+  }
+  @HostListener('document:click', ['$event'])
+  leaveSelected($event) {
+    if (this.openSearch) {
+      this.toggleSearchBox();
+    }
+  }
+
+  // 登录或登出
+  userSession() {
+    this.router.navigate(['/session/signin']);
+  }
+
+  // 二级导航栏状态
+  changeSecondaryNav(type: string) {
+    if (type === 'mouseenter') {
+      clearTimeout(this.timer);
+      this.openSecondary.next(true);
+    } else {
+      this.timer = setTimeout(
+        () => this.openSecondary.next(false),
+        500);
+    }
+  }
+  tabEnterEvent(label: string) {
+    return label === 'Forum' ? this.changeSecondaryNav.bind(this) : () => null;
+  }
+
+  toggleSearchBox() {
+    this.openSearch = !this.openSearch;
+  }
+}
+
+interface HeadItem {
+  name: string;
+  src: string;
+}
 
 const navigation: HeadItem[] = [
   {
@@ -33,66 +95,3 @@ const navigation: HeadItem[] = [
     src: '/about'
   }
 ];
-
-@Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class HeaderComponent implements OnInit {
-
-  @Input() mode: ModeState;
-
-  @ViewChild('search') searchInput: ElementRef;
-
-  public navigation = navigation;
-  public openSearch = false;
-  private openSecondary: Subject<boolean> = new Subject();
-  private timer;
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-  }
-
-  userSession() {
-    this.router.navigate(['/session/signin']);
-  }
-
-  getSecondaryMode() {
-    return this.openSecondary;
-  }
-
-  changeSecondaryNav(type: string) {
-    const action = type === 'mouseenter';
-    if (action) {
-      clearTimeout(this.timer);
-      this.openSecondary.next(true);
-    } else {
-      this.timer = setTimeout(
-        () => this.openSecondary.next(false),
-        500);
-    }
-  }
-
-  tabEnterEvent(label: string) {
-    return label === 'Forum' ? this.changeSecondaryNav.bind(this) : () => null;
-  }
-
-  toggleSearchBox() {
-    this.openSearch = !this.openSearch;
-    if (this.openSearch) {
-      this.searchInput.nativeElement.focus();
-    }
-  }
-
-  startSearch(event) {
-    console.log(event);
-    return false;
-  }
-}
-
-interface HeadItem {
-  name: string;
-  src: string;
-}

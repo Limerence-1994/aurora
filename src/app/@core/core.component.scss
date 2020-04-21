@@ -1,10 +1,12 @@
 @import "../@design/default";
-.core {
+#core {
   width: 100%;
   position: relative;
-  &-content {
-    height: 100vh;
-    overflow: auto;
-    padding-top: $nav-height;
-  }
+}
+
+.core-content {
+  height: 100vh;
+  overflow: auto;
+  position: relative;
+  padding-top: $nav-height;
 }

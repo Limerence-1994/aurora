@@ -2,12 +2,16 @@
 @import "../default";
 @import "theme-core";
 
+/**
+白底黑字 #33353c
+ */
+
 $background-base: #1e1e20;
 $background-deep: darken($background-base, 5%);
 $background-secondary: black;
 $background-inverted: white;
 $background-default: lighten($background-base, 5%);
-$background-match1: lighten($background-base, 9%);
+$background-light: lighten($background-base, 8%);
 $background-float: lighten($background-base, 12%);
 
 $color: (
@@ -16,7 +20,7 @@ $color: (
   activity: #FFE0B2,
   attention: #d7efff,
   success: #5fca4a,
-  error: #F44336
+  error: #F44336,
 );
 
 $text-color: (
@@ -25,7 +29,7 @@ $text-color: (
   default: rgba(white, .8),
   small: rgba(white, .6),
   grey: lighten($background-base, 20%),
-  dark: $background-base
+  dark: #33353c
 );
 
 $base-primary: mat-palette($mat-cyan, A400, 600);
@@ -177,7 +181,8 @@ hr.dotted {
 .header {
   @include Shadow-default;
   color: map-get($text-color, main);
-  background-color: $background-match1;
+  background-color: $background-light;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.24);
 }
 
 .t-paper {
@@ -236,6 +241,7 @@ hr.dotted {
     transform-origin: 0 0;
   }
 }
+
 
 // 覆盖默认material样式
 .mat-tab-header-pagination {
@@ -392,7 +398,7 @@ hr.dotted {
 .theme-notice {
   @include Steel;
   color: map-get($text-color, main);
-  background-color: $background-match1;
+  background-color: $background-light;
 
   .msg-content {
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.24), 0 1px 5px rgba(0, 0, 0, 0.6);
@@ -431,6 +437,7 @@ hr.dotted {
   }
 
   .warning {
+
     #progress {
       stroke: #ff9800
     }
@@ -450,6 +457,68 @@ hr.dotted {
     }
   }
 }
+
+//－－－－－带状态的按钮
+.theme-status-progress {
+  position: relative;
+  overflow: hidden;
+  &::before, &::after{
+    content: '';
+    width: 100%;
+    height: 18px;
+    display: block;
+    position: absolute;
+    left: 0;
+    opacity: .5;
+    animation: move-beam linear 5s infinite;
+    background-size: 300px 100%;
+  }
+  &::before{top: 0;}
+  &::after{top: 18px;}
+  &.start{
+    &::before{
+      background-image: repeating-linear-gradient(45deg,
+        rgba(black, 0),
+        map_get($color, secondary) 15px
+      );
+    }
+    &::after{
+      background-image: repeating-linear-gradient(135deg,
+        rgba(black,0),
+        map_get($color, secondary) 15px);
+    }
+  }
+  &.succ::after, &.succ::before, &.fail::before, &.fail::after {
+    opacity: 0;
+    transition-delay: 500ms;
+    transition: 750ms;
+  }
+  &.succ{
+    &::before{
+      background-image: repeating-linear-gradient(45deg,
+        rgba(black,0),
+        map_get($color, success) 15px);
+    }
+    &::after{
+      background-image: repeating-linear-gradient(135deg,
+        rgba(black,0),
+        map_get($color, success) 15px);
+    }
+  }
+  &.fail{
+    &::before{
+      background-image: repeating-linear-gradient(45deg,
+        rgba(black,0),
+        map_get($color, error) 15px);
+    }
+    &::after{
+      background-image: repeating-linear-gradient(135deg,
+        rgba(black,0),
+        map_get($color, error) 15px);
+    }
+  }
+}
+
 
 // -------------------↑↑↑↑↑组件↑↑↑↑↑------------------
 // -------------------↓↓↓↓↓通用↓↓↓↓↓------------------
@@ -505,7 +574,7 @@ hr.dotted {
 
 .theme-backdrop-paper {
   @include Shadow-default;
-  background-color: $background-match1;
+  background-color: $background-light;
 }
 
 .theme-backdrop-float {
@@ -530,5 +599,8 @@ hr.dotted {
 }
 
 // -------------------↑↑↑↑↑通用↑↑↑↑↑------------------
+// -------------------↓↓↓↓↓模块↓↓↓↓↓------------------
+// button
+.status-button {
 
-
+}

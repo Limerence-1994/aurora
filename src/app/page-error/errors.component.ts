@@ -1,8 +1,9 @@
-import {Component, OnInit, Inject, HostBinding, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {faBan} from '@fortawesome/free-solid-svg-icons';
 import {Location} from '@angular/common';
-import {PAGE_POPUP_DATA} from '../@public/integrated/popup/popup.config';
+import {POPUP_DATA} from '../@public/services/popup/popup.config';
 import {slideIntoLeft} from '../@design/animations';
+import {ComponentAnimation} from '../@extends/components';
 
 @Component({
   selector: 'app-errors',
@@ -11,23 +12,23 @@ import {slideIntoLeft} from '../@design/animations';
   animations: [slideIntoLeft]
 })
 
-export class ErrorsComponent implements OnInit, OnDestroy {
-
-  @HostBinding('@component') a = 'in';
+export class ErrorsComponent extends ComponentAnimation implements OnInit, OnDestroy {
 
   public icon = faBan;
 
   constructor(
-    @Inject(PAGE_POPUP_DATA) public data: ErrorConfig,
+    @Inject(POPUP_DATA) public data: ErrorConfig,
     public location: Location,
   ) {
+    super();
+    super.setEnter('translate3d(100%, 0, 0)', 'translate3d(0%, 0, 0)')
   }
 
   ngOnInit() {
   }
 
   ngOnDestroy(): void {
-    this.a = 'out';
+    super.setLeave('translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)')
   }
 }
 
