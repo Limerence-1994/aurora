@@ -1,15 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ErrorContainerComponent} from './error-container.component';
-import {ErrorsComponent} from './errors.component';
 import {ErrorRoutingModule} from './error-routing.module';
 import {CardModule} from '../@public/components/card/card.module';
 import {MatButtonModule} from '@angular/material/button';
+import {NotFoundComponent, NotFoundContainerComponent} from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
-    ErrorsComponent,
-    ErrorContainerComponent
+    ErrorContainerComponent,
+    NotFoundComponent,
+    NotFoundContainerComponent
   ],
   imports: [
     CommonModule,
@@ -18,4 +19,5 @@ import {MatButtonModule} from '@angular/material/button';
     ErrorRoutingModule
   ]
 })
-export class ErrorModule { }
+export class ErrorModule {
+}

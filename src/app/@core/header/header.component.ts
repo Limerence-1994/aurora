@@ -87,10 +87,6 @@ const navigation: HeadItem[] = [
     src: '/library'
   },
   {
-    name: 'Trial court',
-    src: '/court'
-  },
-  {
     name: 'About us',
     src: '/about'
   }

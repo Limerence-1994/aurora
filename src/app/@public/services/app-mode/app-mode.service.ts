@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { ModeState } from '../../../@models/mode.model';
 import { Observable } from 'rxjs';
 import { reset, update } from '../../../@store/mode/mode.actions';
-import { distinctUntilChanged } from 'rxjs/operators';
+import {distinctUntilChanged, share} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,14 @@ export class AppModeService {
   }
 
   getModeStatus() {
-    return this.mode$.pipe(distinctUntilChanged());
+    return this.mode$.pipe(
+      distinctUntilChanged(),
+      share()
+    );
   }
 
-  update(mode: ModeState) {
-    this.store.dispatch(update({payload: mode}));
+  update(payload: ModeState, patron: string) {
+    this.store.dispatch(update({payload, patron}));
   }
 
   reset() {

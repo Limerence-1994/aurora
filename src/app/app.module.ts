@@ -25,8 +25,8 @@ export function InitServiceFactory(initService: InitializeService): () => void {
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     StoreModule,
     CoreModule,
     NoticeModule,

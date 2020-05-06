@@ -9,13 +9,13 @@ $monitor-height: 18px;
 
 .status-text {
   width: 100px;
-  display: inline-block;
+  display: inline-flex;
   height: 20px;
   margin-right: -10px;
-  line-height: 20px;
   overflow: hidden;
   padding: 0 6px;
-  font-size: 14px;
+  align-items: center;
+  font-family: "screen", "Royal Samurai", "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .status-monitor {

@@ -1,8 +1,8 @@
-<div class="navigation" [ngClass]="mode">
+<div class="navigation theme-shadow-card" [ngClass]="mode">
   <header class="header smallest">
     <div class="header-content">
-      <div class="col-2 logo">LOGO</div>
-      <div class="col-8 nav">
+      <h1 class="logo">LOGO</h1>
+      <div class="col-auto nav">
         <app-router-nav>
           <app-router-nav-item
             *ngFor="let link of navigation"
@@ -13,17 +13,36 @@
           ></app-router-nav-item>
         </app-router-nav>
       </div>
-      <div class="col-2 action asc-buttons">
-        <button mat-icon-button (click)="userSession()">
-          <fa-icon class="icon" size="lg" icon="sign-in-alt"></fa-icon>
+      <div class="action asc-buttons">
+<!--        如果登录-->
+        <button mat-button class="user-action">
+          <span class="theme-user-avatar avatar">
+            <img class="asc-image" src="assets/images/avatar/1df48da.jpg" alt="">
+          </span>
+          <span i18n [matTooltip]="'点我领取老爷爷'" class="user-name asc-text-omit">点我领取老爷爷</span>&nbsp;
+          <fa-icon class="icon" size="lg" icon="caret-down"></fa-icon>
         </button>
-        <button mat-icon-button>
+<!--        未登录-->
+<!--        <button mat-button class="user-action"-->
+<!--                [matTooltip]="login.innerText"-->
+<!--                (click)="userSession()">-->
+<!--          <span class="theme-user-avatar avatar">-->
+<!--            <fa-icon class="icon" size="lg" icon="user"></fa-icon>-->
+<!--            &lt;!&ndash;            <img class="asc-image" src="assets/images/avatar/1df48da.jpg" alt="">&ndash;&gt;-->
+<!--          </span>-->
+<!--          <span i18n>临时游客</span>&nbsp;-->
+<!--          <fa-icon class="icon" size="lg" icon="sign-in-alt"></fa-icon>-->
+<!--        </button>-->
+
+        <button mat-icon-button [matTooltip]="notice.innerText">
           <fa-icon class="icon" size="lg" icon="bell"></fa-icon>
         </button>
-        <button mat-icon-button (click)="toggleSearchBox()">
+
+        <button mat-icon-button [matTooltip]="search.innerText" (click)="toggleSearchBox()">
           <fa-icon class="icon" size="lg" icon="search"></fa-icon>
         </button>
-        <button mat-icon-button><fa-icon size="lg" icon="expand"></fa-icon></button>
+
+        <button mat-icon-button [matTooltip]="full.innerText"><fa-icon size="lg" icon="expand"></fa-icon></button>
       </div>
     </div>
   </header>
@@ -45,3 +64,9 @@
     </div>
   </div>
 </div>
+
+<!--隐藏-->
+<span class="asc-text-i18n" #login i18n>Login</span>
+<span class="asc-text-i18n" #notice i18n>Notice</span>
+<span class="asc-text-i18n" #search i18n>Search</span>
+<span class="asc-text-i18n" #full i18n>Full Screen</span>

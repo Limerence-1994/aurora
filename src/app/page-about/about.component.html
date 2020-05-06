@@ -1,16 +1,46 @@
 <div class="about">
-  <mat-card class="first">
-    <div>
-      <h1>Aurora Technology Community</h1>
+<!--  首屏-->
+  <mat-card class="first theme-shadow-card">
+    <div class="color-text_reverse">
+      <div class='title'>
+        <h1>{{settingData.zhName}}</h1>
+        <h1>
+          <pub-text-distortion [text]="settingData.enName"></pub-text-distortion>
+        </h1>
+      </div>
+      <small>{{settingData.zhIntroduction}}</small><br>
+      <small>{{settingData.enIntroduction}}</small>
     </div>
+    <nav class="navs color-text_reverse">
+      <a *ngFor="let link of navLinks;let key = index"
+         [routerLink]="link.path"
+         [class.color-text_warn]="isActive === key">
+        {{link.label}}
+      </a>
+    </nav>
   </mat-card>
-  <div class="theme-backdrop-base content">
-    <div class="asc-container">
-      <hr>
+<!--  主要内容-->
+  <div class="asc-container theme-backdrop-paper article">
+    <router-outlet></router-outlet>
+  </div>
+<!--加入我们-->
+  <div class='about-join theme-shadow-concave'>
+    <div class="asc-container join-box">
+      <div class="join-prism theme-shadow-card">
+        <div class="content">{{settingData.enName}}</div>
+      </div>
+      <div class="join-actions">
+        <div>
+          <h1 i18n>现在开始，加入我们</h1>
+          <p>
+            <a mat-raised-button color="accent" routerLink="/sign/up" i18n>立即注册</a>
+            <a mat-raised-button color="primary" mat-button routerLink="" i18n>加入群组</a>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="join">
-
+  <div class="theme-backdrop-base about-footer">
+    ————— End —————
   </div>
-  <div class="theme-backdrop-base about-footer"></div>
 </div>

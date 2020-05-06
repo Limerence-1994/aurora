@@ -1,26 +1,20 @@
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
-  ChangeDetectorRef
-} from '@angular/core';
-import {
-  Router,
   ActivatedRoute,
-  NavigationStart,
   NavigationEnd,
   NavigationError,
+  NavigationStart,
   RouteConfigLoadEnd,
-  RouteConfigLoadStart
+  RouteConfigLoadStart,
+  Router
 } from '@angular/router';
 import {StatusMonitorService} from '../@public/integrated/status-monitor';
 import {ModeState, ModeStateEnum} from '../@models/mode.model';
-import {filter, map, mergeMap, tap} from 'rxjs/operators';
-import {AppModeService, ScrollService} from '../@public/services';
-import {Subscription} from 'rxjs';
+import {filter, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {AppModeService, ScrollService, SiteMetaService} from '../@public/services';
+import {Subscription, merge} from 'rxjs';
+import {RouterMate} from '../@models/settings.module';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-core',
@@ -31,17 +25,20 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('cdRef')
   public container: ElementRef;
-  mode: ModeState;
+  public mode: ModeState;
   private subscriber: Subscription[] = [];
+  private navigating: boolean;
 
   constructor(
     private router: Router,
     private scroll: ScrollService,
     private cdr: ChangeDetectorRef,
+    private meta: SiteMetaService,
     private modeService: AppModeService,
     private activatedRoute: ActivatedRoute,
     private statusMonitor: StatusMonitorService,
-  ) {}
+  ) {
+  }
 
   ngAfterViewInit(): void {
     // 需要监听滚动容器中子元素的位置
@@ -49,20 +46,9 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('core init');
     this.subscriber.push(
-      this.modeService
-        .getModeStatus()
-        .subscribe(this.setMode.bind(this)),
-
-      this.scroll
-        .directionNotice()
-        .subscribe(r => {
-          this.modeService.update(r === 'top'
-            ? ModeStateEnum.OPEN
-            : ModeStateEnum.SIMPLIFY);
-        }),
-
+      this.listenMode(),
+      this.listenScroll(),
       this.router.events.pipe(
         // 监听并且设置状态
         tap(this.navigateStatus.bind(this)),
@@ -80,12 +66,15 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
         filter(route => route.outlet === 'primary'),
         // 提取data
         mergeMap(route => route.data)
-      ).subscribe(r => {
-        if (r.locking) {
-          this.modeService.update(ModeStateEnum.CLOSE);
+      ).subscribe((mate: RouterMate) => {
+        this.scroll.scrollToTop(mate.scrollTop ?? 0);
+        this.meta.update(mate.metadata);
+        if (mate.locking) {
+          this.modeService.update(ModeStateEnum.CLOSE, 'core router');
         } else if (this.mode !== ModeStateEnum.OPEN) {
-          this.modeService.update(ModeStateEnum.OPEN);
+          this.modeService.update(ModeStateEnum.OPEN, 'core router');
         }
+        setTimeout(_ => this.navigating = false, 300)
       })
     );
   }
@@ -96,9 +85,28 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  navigateStatus(event) {
+  private listenMode(): Subscription {
+    return this.modeService
+      .getModeStatus()
+      .subscribe(next => {
+        this.mode = next;
+        this.cdr.detectChanges();
+      })
+  }
+
+  private listenScroll():Subscription {
+    return this.scroll.directionNotice()
+      .pipe(filter(_ => !this.navigating)) // 路由导航时忽略
+      .subscribe(next => {
+        this.modeService.update(next === 'top'
+          ? ModeStateEnum.OPEN
+          : ModeStateEnum.SIMPLIFY, 'core scroll');
+      })
+  }
+
+  private navigateStatus(event) {
     if (event instanceof NavigationStart) {
-      ScrollService.scrollToTop();
+      this.navigating = true;
     }
     if (event instanceof RouteConfigLoadStart) {
       this.statusMonitor.uncertain('navigate');
@@ -109,10 +117,5 @@ export class CoreComponent implements OnInit, OnDestroy, AfterViewInit {
     if (event instanceof NavigationError) {
       this.statusMonitor.error();
     }
-  }
-
-  setMode(rel: ModeStateEnum) {
-    this.mode = rel;
-    this.cdr.detectChanges();
   }
 }

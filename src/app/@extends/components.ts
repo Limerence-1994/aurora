@@ -9,21 +9,3 @@
  */
 import {HostBinding, OnDestroy} from '@angular/core';
 
-export abstract class ComponentAnimation implements OnDestroy {
-  @HostBinding('@component') animate: string;
-  protected constructor() {}
-
-  abstract ngOnDestroy(): void
-
-  protected setEnter(from, to: string) {
-    this.animate = `{value: in, params: {
-    ENTRY_FROM: "${from}",
-    ENTRY_TO: "${to}"}}`
-  }
-
-  protected setLeave(from, to: string) {
-    this.animate = `{value: out, params: {
-      LEAVE_FROM: "${from}",
-      LEAVE_TO: "${to}"`
-  }
-}

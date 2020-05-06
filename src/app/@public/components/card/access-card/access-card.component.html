@@ -1,6 +1,5 @@
-<div class="theme-shadow-polygon">
-  <div class="theme-lining card-box clip"
-       [ngStyle]="{width: width, height: height}">
+<div class="theme-shadow-card">
+  <div class="theme-lining card-box" [ngClass]="classList">
     <h1 *ngIf="title" class="color-text_active title">{{title}}</h1>
     <div class="theme-screen theme-shadow-concave clip content">
       <ng-content></ng-content>

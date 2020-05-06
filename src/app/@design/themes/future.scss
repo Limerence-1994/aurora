@@ -38,18 +38,20 @@ $base-warn: mat-palette($mat-red, A200);
 
 $future-dark-background: (
   status-bar: black,
-  app-bar: map-get($mat-grey, 900),
+  app-bar: map_get($mat-grey, 900),
   background: $background-base,
-  hover: rgba(white, 0.05),
+  hover: rgba(white, 0.04),
   card: $background-default,
-  dialog: map-get($mat-grey, 800),
+  dialog: $background-light,
   disabled-button: rgba(white, 0.12),
   raised-button: map-get($mat-grey, 800),
-  focused-button: $light-focused, selected-button: map-get($mat-grey, 900),
-  selected-disabled-button: map-get($mat-grey, 800),
+  focused-button: $light-focused,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
   disabled-button-toggle: black,
-  unselected-chip: map-get($mat-grey, 700),
-  disabled-list-option: black
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+  tooltip: map_get($mat-grey, 800),
 );
 $future-dark-foreground: (
   base: white,
@@ -66,7 +68,7 @@ $future-dark-foreground: (
   text: map-get($text-color, default),
   slider-min: white,
   slider-off: rgba(white, 0.3),
-  slider-off-active: rgba(white, 0.3)
+  slider-off-active: rgba(white, 0.3),
 );
 
 @function future-dark-theme($primary, $accent, $warn: mat-palette($mat-red)) {
@@ -125,9 +127,8 @@ $future: future-dark-theme($base-primary, $base-accent, $base-warn);
   pointer-events: none;
   position: absolute;
   z-index: $level-top;
-  background-image:
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+  linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
   background-size: 100% 2px, 2px 100%;
 }
 
@@ -142,21 +143,6 @@ body {
 //－－－－－链接
 a {
   color: inherit;
-}
-
-.mat-tab-label {
-  transition: 150ms;
-  opacity: .8;
-}
-
-.theme-link-active,
-.mat-tab-label-active {
-  @include Activity;
-}
-
-.mat-tab-label:hover {
-  @include Attention;
-  opacity: 1;
 }
 
 hr {
@@ -174,6 +160,29 @@ hr.dotted {
   border-bottom: 1px solid map-get($color, attention);
 }
 
+//－－－－－文本选择
+::selection {
+  color: map-get($text-color, action);
+  background-color: $background-deep;
+  text-shadow: none;
+}
+
+.mat-tab-label {
+  transition: 150ms;
+  opacity: .8;
+}
+
+.theme-link-active,
+.mat-tab-label-active {
+  @include Activity;
+}
+
+.mat-tab-label:hover {
+  @include Attention;
+  opacity: 1;
+}
+
+
 // ------------------↑↑↑↑↑标签↑↑↑↑↑------------------
 // ------------------↓↓↓↓↓组件↓↓↓↓↓------------------
 
@@ -185,12 +194,8 @@ hr.dotted {
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.24);
 }
 
-.t-paper {
-  @include Shadow-default;
-}
-
 .theme-scrollbar {
-  scroll-behavior: smooth;
+  //scroll-behavior: smooth;
   scrollbar-color: map-get($color, activity) black;
   scrollbar-width: thin;
 
@@ -206,12 +211,12 @@ hr.dotted {
   }
 
   &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
+    border-radius: 3px;
     box-shadow: inset 0 1px 2px black;
     // background: rgba(black, .25) url("~src/assets/images/mark.png") no-repeat center center;
     background: black;
     background-size: 100%;
-    border: 1px map-get($color, secondary) solid;
+    border: 1px map-get($color, activity) solid;
   }
 }
 
@@ -277,10 +282,8 @@ hr.dotted {
   filter: drop-shadow(10px 0 10px rgba(0, 0, 0, 0.2)) drop-shadow(-5px 5px 5px rgba(0, 0, 0, 0.3));
 
   &::before {
+    @include Steel;
     background-color: $background-default;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.24);
-    border-top: 1px solid rgba(0, 0, 0, 0.5);
-    border-left: 1px solid map-get($color, main);
     border-right: 1px solid map-get($color, main);
     border-bottom: 1px solid map-get($color, main);
   }
@@ -332,7 +335,8 @@ hr.dotted {
 .theme-edge {
   position: relative;
   padding: 32px;
-  &::before{
+
+  &::before {
     content: '';
     position: absolute;
     left: -10px;
@@ -370,11 +374,10 @@ hr.dotted {
     left: 0;
     z-index: $level-height;
     animation: Move-down infinite linear 5s;
-    background-image:
-      linear-gradient(to bottom, rgba(white, 0), rgba(white, .35), rgba(white, 0));
+    background-image: linear-gradient(to bottom, rgba(white, 0), rgba(white, .35), rgba(white, 0));
   }
 
-  &::after{
+  &::after {
     content: "";
     @include GridLines;
   }
@@ -388,6 +391,7 @@ hr.dotted {
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   overflow: hidden;
+
   &::after {
     content: "";
     @include GridLines;
@@ -462,7 +466,8 @@ hr.dotted {
 .theme-status-progress {
   position: relative;
   overflow: hidden;
-  &::before, &::after{
+
+  &::before, &::after {
     content: '';
     width: 100%;
     height: 18px;
@@ -473,52 +478,73 @@ hr.dotted {
     animation: move-beam linear 5s infinite;
     background-size: 300px 100%;
   }
-  &::before{top: 0;}
-  &::after{top: 18px;}
-  &.start{
-    &::before{
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+    top: 18px;
+  }
+
+  &.start {
+    &::before {
       background-image: repeating-linear-gradient(45deg,
         rgba(black, 0),
         map_get($color, secondary) 15px
       );
     }
-    &::after{
+
+    &::after {
       background-image: repeating-linear-gradient(135deg,
-        rgba(black,0),
+        rgba(black, 0),
         map_get($color, secondary) 15px);
     }
   }
+
   &.succ::after, &.succ::before, &.fail::before, &.fail::after {
     opacity: 0;
     transition-delay: 500ms;
     transition: 750ms;
   }
-  &.succ{
-    &::before{
+
+  &.succ {
+    &::before {
       background-image: repeating-linear-gradient(45deg,
-        rgba(black,0),
+        rgba(black, 0),
         map_get($color, success) 15px);
     }
-    &::after{
+
+    &::after {
       background-image: repeating-linear-gradient(135deg,
-        rgba(black,0),
+        rgba(black, 0),
         map_get($color, success) 15px);
     }
   }
-  &.fail{
-    &::before{
+
+  &.fail {
+    &::before {
       background-image: repeating-linear-gradient(45deg,
-        rgba(black,0),
+        rgba(black, 0),
         map_get($color, error) 15px);
     }
-    &::after{
+
+    &::after {
       background-image: repeating-linear-gradient(135deg,
-        rgba(black,0),
+        rgba(black, 0),
         map_get($color, error) 15px);
     }
   }
 }
 
+.theme-user-avatar {
+  border-radius: 5px;
+  color: map-get($text-color, dark);
+  background-color: $background-inverted;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 8px;
+}
 
 // -------------------↑↑↑↑↑组件↑↑↑↑↑------------------
 // -------------------↓↓↓↓↓通用↓↓↓↓↓------------------
@@ -531,28 +557,32 @@ hr.dotted {
   color: map-get($text-color, action);
 }
 
-.color-bg_main {
-  background-color: map-get($color, main);
+.color-text_reverse {
+  color: map-get($text-color, dark);
 }
 
 .color-text_succ {
   color: #5fca4a;
 }
 
-.color-bg_succ {
-  background-color: #5fca4a;
-}
-
 .color-text_warn {
   color: map-get($color, secondary);
 }
 
-.color-bg_warn {
-  background-color: map-get($color, secondary);
-}
-
 .color-text_error {
   color: map-get($color, error);
+}
+
+.color-bg_main {
+  background-color: map-get($color, main);
+}
+
+.color-bg_succ {
+  background-color: #5fca4a;
+}
+
+.color-bg_warn {
+  background-color: map-get($color, secondary);
 }
 
 .color-bg_error {
@@ -573,6 +603,8 @@ hr.dotted {
 }
 
 .theme-backdrop-paper {
+  border-radius: 5px;
+  padding: $padding-main;
   @include Shadow-default;
   background-color: $background-light;
 }
@@ -581,6 +613,7 @@ hr.dotted {
   @include Shadow-active;
   background-color: $background-float;
 }
+
 //－－－－－阴影
 .theme-shadow-card {
   @include Shadow-default
@@ -591,7 +624,7 @@ hr.dotted {
 }
 
 .theme-shadow-polygon {
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
 }
 
 .theme-shadow-concave {

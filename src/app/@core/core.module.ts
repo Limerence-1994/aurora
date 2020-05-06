@@ -18,7 +18,7 @@ import {
   faTimesCircle, faCompass, faIdCardAlt, faUserSecret, faTrophy,
   faFire, faIdCard, faDungeon, faComment, faCommentAlt, faEnvelope,
   faBook, faToolbox, faLink, faBookReader, faUserCircle, faBell, faSearch, faExpand,
-  faSignInAlt, faSignOutAlt
+  faSignInAlt, faSignOutAlt, faCaretDown, faUser
 } from '@fortawesome/free-solid-svg-icons';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -62,7 +62,7 @@ export class CoreModule {
       faTimesCircle, faCompass, faGithub, faWeixin, faIdCardAlt, faUserSecret,
       faTrophy, faFire, faIdCard, faDungeon, faComment, faCommentAlt, faEnvelope,
       faBook, faToolbox, faLink, faBookReader, faUserCircle, faBell, faSearch, faExpand,
-      faSignInAlt, faSignOutAlt
+      faSignInAlt, faSignOutAlt, faCaretDown, faUser
     );
   }
 }

@@ -6,7 +6,7 @@ const initialState: ModeState = ModeStateEnum.INITIAL;
 
 const _modeReducer = createReducer<ModeState>(
   initialState,
-  on(update, (_, { payload }: ModeProps) => payload),
+  on(update, (_, { payload }) => payload),
   on(reset, () => ModeStateEnum.CLOSE),
 );
 

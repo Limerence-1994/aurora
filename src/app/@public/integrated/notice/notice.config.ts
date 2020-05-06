@@ -6,10 +6,10 @@
 import { InjectionToken, ViewContainerRef } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-export const ASC_NOTICE_DATA = new InjectionToken<NoticeConfig>('notice-data');
+export const ASC_NOTICE_DATA = new InjectionToken<NoticeConfig>('notice-events-data');
 
 export const ASC_NOTIFICATION_DEFAULT_OPTIONS =
-  new InjectionToken<NoticeConfig>('notice-default-options', {
+  new InjectionToken<NoticeConfig>('notice-events-default-options', {
     providedIn: 'root',
     factory: NOTIFICATION_DEFAULT_OPTIONS_FACTORY
   });

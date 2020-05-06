@@ -1,5 +1,7 @@
 <div class="smallest curtain-top theme-curtain" [ngClass]="mode">
-  <div class="curtain-top-lining theme-lining"></div>
+  <div class="curtain-top-lining theme-lining">
+    <div class="card-backdrop_top theme-backdrop-deep theme-shadow-concave"><div></div></div>
+  </div>
   <!--副标题栏-->
   <div class="curtain-top-subtitle theme-subtitle">
     <div class="content">
@@ -12,7 +14,8 @@
 <ng-content></ng-content>
 
 <div class="smallest curtain-bot theme-curtain" [ngClass]="mode">
-  <div class="asc-trapezoid theme-trapezoid curtain-bot-part left"></div>
   <div class="asc-trapezoid theme-trapezoid curtain-bot-part right"></div>
-  <div class="curtain-bot-lining theme-lining"></div>
+  <div class="curtain-bot-lining theme-lining">
+    <div class="card-backdrop_bot theme-backdrop-deep theme-shadow-concave"><div></div></div>
+  </div>
 </div>

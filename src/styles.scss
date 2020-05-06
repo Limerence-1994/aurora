@@ -62,8 +62,8 @@ html, body {
   }
 }
 
-html, body, .smallest, .cdk-overlay-container {
-  min-width: $Breakpoint-lg;
+html, body, .smallest, .cdk-overlay-container, .app-overlay-container {
+  min-width: $Breakpoint-nm;
 }
 
 *, *::after, *::before {
@@ -77,46 +77,50 @@ a {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  margin: 0 0 16px 0;
+  margin: 0 0 $padding-main 0;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 1.2;
   color: inherit;
 }
 
 h1, .h1 {
-  font-size: 2.5rem;
+  font-size: 40px;
 }
 
 h2, .h2 {
-  font-size: 2rem;
+  font-size: 32px;
 }
 
 h3, .h3 {
-  font-size: 1.75rem;
+  font-size: 28px;
 }
 
 h4, .h4 {
-  font-size: 1.5rem;
+  font-size: 24px;
 }
 
 h5, .h5 {
-  font-size: 1.25rem;
+  font-size: 20px;
 }
 
 h6, .h6 {
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 ul, ol, li, p, .paragraph {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: $padding-main;
   padding: 0;
   list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6, em, strong, cite {
+em, strong, cite {
   font-weight: bold;
+}
+
+article, .article{
+  margin-bottom: $margin-stage;
 }
 
 .small, small {
@@ -128,12 +132,13 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
   flex-wrap: wrap;
 }
 
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
 .col-auto {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  width: auto;
-  max-width: none;
+  flex: auto;
 }
 
 @for $i from 1 through 12 {
@@ -145,7 +150,9 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
   }
 }
 
-.asc-grid {
+$prefix: asc;
+
+.#{$prefix}-grid {
   $gutters: 16px;
   display: grid !important;
   grid-gap: $gutters $gutters;
@@ -154,28 +161,29 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
   grid-template-columns: [start] repeat(6, 1fr) [center] repeat(6, 1fr) [end];
 }
 
-.asc-grid-full {
+.#{$prefix}-grid-full {
   grid-column: start / end;
 }
 
-.asc-grid-half_1 {
+.#{$prefix}-grid-half_1 {
   grid-column: start / center;
 }
 
-.asc-grid-half_2 {
+.#{$prefix}-grid-half_2 {
   grid-column: center / end;
 }
 
 @for $i from 1 through 12 {
-  .asc-column--#{$i} {
+  .#{$prefix}-column--#{$i} {
     grid-column: span $i
   }
 }
 
-.asc-container {
+.#{$prefix}-container {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  padding: $padding-main;
   @media (min-width: $Breakpoint-lg) {
     max-width: 1140px
   }
@@ -184,35 +192,33 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
   }
 }
 
-.asc-photo {
+.#{$prefix}-photo {
   line-height: 0;
   vertical-align: middle;
 }
 
-.asc-actions {
+.#{$prefix}-image {
+  max-width: 100%;
+}
+
+.#{$prefix}-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.asc-buttons > button:not(:last-child) {
+.#{$prefix}-buttons > button:not(:last-child) {
   margin-right: 16px;
-}
-
-.icon {
-  width: 16px;
-  height: 16px;
 }
 
 .app-overlay-container {
   position: fixed;
-  z-index: $level-top;
+  z-index: $level-curtain;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  min-width: $Breakpoint-lg;
   pointer-events: none;
   .cdk-global-overlay-wrapper {
     pointer-events: none;
@@ -221,4 +227,19 @@ h1, h2, h3, h4, h5, h6, em, strong, cite {
     height: 100%;
     width: 100%;
   }
+}
+
+.#{$prefix}-access-card{
+  @include card;
+}
+
+.#{$prefix}-text-i18n {
+  display: none;
+  opacity: 0;
+}
+
+.#{$prefix}-text-omit {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }

@@ -3,12 +3,12 @@
 .search-box {
   position: absolute;
   right: 32px;
-  bottom: -$nav-height;
+  top: -$nav-height;
   z-index: -1;
-  transform: translate3d(0, -$nav-height, 0);
+  transform: translate3d(0, 0, 0);
   transition: $easing-tans $time-popup-fadeout;
   &.open {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, #{$nav-height * 2}, 0);
     transition: $easing-tans $time-popup-fadein;
   }
 }

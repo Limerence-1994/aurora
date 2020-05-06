@@ -8,17 +8,17 @@ export const routes: Routes = [
   {
     path: '',
     component: SessionComponent,
-    data: { identifier: 'session' },
+    data: { metadata: {identifier: 'HOME'} },
   },
   {
     path: 'signin',
     component: SignInContainerComponent,
-    data: { identifier: 'sign in' }
+    data: { metadata: {identifier: 'Sign in'} }
   },
   {
     path: 'signout',
     component: SignoutComponent,
-    data: { identifier: 'sign out' }
+    data: { metadata: {identifier: 'Sign out'} }
   },
 ];
 

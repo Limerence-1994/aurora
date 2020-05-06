@@ -1,12 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import {Settings} from '../../@models/settings.module';
+import {Props} from '../extends';
 
-export interface SettingsProps {
-  // 待更新的值
-  payload: Settings;
-  // 由哪里调用
-  patron: string;
-}
+export interface SettingsProps extends Props<Settings>{}
 // 动作类型
 enum SettingsActionType {
   UPDATE    = '[Settings Component] Update',

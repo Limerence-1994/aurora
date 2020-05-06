@@ -5,32 +5,35 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: $level-height;
+  z-index: $level-curtain;
   transition: $time-detailed $easing-tans;
   will-change: transform;
   transform: translate3d(0, -105%, 0);
   &-lining {
-    height: $curtain-height
+    height: $curtain-height;
   }
   &-subtitle {
     width: 350px;
-    height: $part-height - 1;
-    padding: 0 1rem;
+    height: $part-height;
+    padding: 0 16px;
     position: absolute;
-    bottom: -$part-height;
+    bottom: -($part-height+1);
     z-index: 5;
-    left: 12%;
+    left: 0;
+    display: flex;
+    align-items: center;
     transition: $time-complex;
     &::before {
       content: '';
       position: absolute;
       z-index: -1;
-      top: 0;
+      top: 1px;
       left: 0;
       right: 0;
       bottom: 0;
       box-sizing: border-box;
-      transform: scaleY(1) perspective(10.5px) rotateX(-3.5deg);
+      transform-origin: bottom left;
+      transform: scaleY(1) perspective(15px) rotateX(-2.5deg);
     }
   }
   &.close {
@@ -57,7 +60,7 @@ $gap: $part-height / 2;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: $level-top;
+  z-index: $level-curtain;
   transition: $time-detailed $easing-tans;
   will-change: transform;
   border-top: 1px solid black;
@@ -76,20 +79,9 @@ $gap: $part-height / 2;
     height: $part-height;
     position: absolute;
     top: -$part-height;
-    &.left {
-      left: 0;
-      width: calc(12% - 38px);
-      &::after {
-        display: none
-      }
-      &::before {
-        transform-origin: bottom left;
-        border-top-right-radius: 2px;
-      }
-    }
     &.right {
       right: -60px;
-      width: calc(88% - 328px);
+      width: calc(100% - 345px);
       &::after {
         transform-origin: bottom right;
         border-top-left-radius: 2px;
@@ -101,8 +93,31 @@ $gap: $part-height / 2;
   }
 }
 
+@mixin card-backdrop($diff) {
+  width: $card-width;
+  height: $card-width / 4 - $diff;
+}
 
-
+.card-backdrop_top {
+  padding-right: 18px;
+  border-top-left-radius: 5px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  > div {
+    @include card-backdrop(12)
+  }
+}
+.card-backdrop_bot {
+  padding-right: 18px;
+  border-bottom-left-radius: 5px;
+  position: absolute;
+  right: 0;
+  top: - $part-height;
+  > div {
+    @include card-backdrop(-($part-height - 10));
+  }
+}
 
 
 

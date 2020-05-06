@@ -3,7 +3,7 @@ import {DOCUMENT} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {ThemeService} from '../@public/services';
 import {SettingsService} from '../@public/services';
-import {StorageService} from '../@public/services';
+import {Settings} from '../@models/settings.module';
 
 @Injectable()
 export class InitializeService {
@@ -23,21 +23,18 @@ export class InitializeService {
       'beforeend',
       '<p>Initializing...</p>'
     );
-    const time  = (new Date()).toLocaleString();
+    const time    = (new Date()).toLocaleString();
     const storage = JSON.parse(localStorage.getItem('settings'));
-    const rel   = this.httpService.get('assets/init.json')
+    const rel     = this.httpService.get('assets/init.json')
       .toPromise()
-      .then((data: any) => {
-        let themeName = 'future';
-        if (storage) {
-          // 获取上次设置
-          themeName = storage.currentTheme || 'future';
-        }
+      .then((data: Settings) => {
+        const {currentTheme='future', version} = data;
+        this.settings.updateSettings(data, 'init');
         // -----------------------------------------
         text.insertAdjacentHTML(
           'beforeend',
           `<p>
-                  <span class="ld-tag">Version:</span>${data.version} <br>
+                  <span class="ld-tag">Version:</span>${version} <br>
                   <span class="ld-tag">Time:</span>${time} <br>
                   <span class="ld-tag">Theme:</span>${'future'} <br>
                 </p>
@@ -45,7 +42,7 @@ export class InitializeService {
                 <p>Loading style sheet...</p>`
         );
         // -----------------------------------------
-        this.theme.loadStyle(themeName)
+        this.theme.loadStyle(currentTheme)
           .then(_ => {
             text.insertAdjacentHTML(
               'beforeend',

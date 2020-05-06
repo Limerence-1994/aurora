@@ -20,6 +20,7 @@ export class StatusMonitorComponent implements OnInit, StaTemplate, OnDestroy {
   monitorStatus: MonitorConfig = new MonitorConfig();
 
   private subscription: Subscription;
+  private timer;
 
   constructor(
     private cdr:        ChangeDetectorRef,
@@ -36,6 +37,9 @@ export class StatusMonitorComponent implements OnInit, StaTemplate, OnDestroy {
   }
 
   handler(config: MonitorConfig): void {
+    if (this.timer){
+      clearTimeout(this.timer);
+    }
     this.monitorStatus = {...this.monitorStatus, ...config};
     if (config.complete) {
       this.dismiss();
@@ -44,8 +48,12 @@ export class StatusMonitorComponent implements OnInit, StaTemplate, OnDestroy {
   };
 
   dismiss() {
-    this.monitorStatus.caller = 'ready';
+    this.monitorStatus.caller = 'complete';
     this.monitorStatus.mode = MonitorOptions.DISMISS;
     this.isComplete.emit();
+    this.timer = setTimeout(_ => {
+      this.monitorStatus.caller = 'ready';
+      this.cdr.detectChanges();
+    }, 1500);
   }
 }

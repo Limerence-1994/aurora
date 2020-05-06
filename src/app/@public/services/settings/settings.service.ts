@@ -15,10 +15,14 @@ export class SettingsService {
     this.store$ = settingStore.pipe(select('settings'));
   }
 
-  updateSettings(patron: string, payload: Settings) {
+  updateSettings(payload: Settings, patron: string) {
     this.settingStore.dispatch(update({
       payload,
       patron
     }));
+  }
+
+  getSettings(): Observable<Settings> {
+    return this.store$
   }
 }

@@ -1,5 +1,12 @@
 @import "../../@design/default";
 
+$logo-width: 220px;
+$action-width: 350px;
+
+.nav {
+  max-width: calc(100% - #{$logo-width + $action-width});
+}
+
 .navigation {
   position: fixed;
   z-index: $level-max;
@@ -8,6 +15,7 @@
   width: 100%;
   height: $nav-height;
   line-height: $nav-height;
+  user-select: none;
   transition: $time-detailed $easing-tans;
   &.open {
     transform: translate3d(0, 0, 0)
@@ -18,16 +26,24 @@
 }
 
 .header {
-  padding: 0 32px;
+  padding: 0 $padding-main;
   height: 100%;
   width: 100%;
   &-content {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
+  }
+  .logo {
+    width: 220px;
+    min-width: 220px;
+    margin-bottom: 0;
   }
   .action {
     text-align: right;
     white-space: nowrap;
+    width: 350px;
+    min-width: 350px;
   }
 }
 
@@ -66,4 +82,22 @@
 .step-content {
   flex: 1;
   position: relative;
+}
+
+.user-action {
+  padding-left: 0;
+  padding-right: 2px;
+}
+.user-name {
+  max-width: 100px;
+  display: inline-block;
+}
+.avatar {
+  height: 36px;
+  width: 36px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }

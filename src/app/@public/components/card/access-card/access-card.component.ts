@@ -1,18 +1,16 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Icon} from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'access-card',
   templateUrl: './access-card.component.html',
-  styleUrls: ['./access-card.component.scss']
+  styleUrls: ['./access-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccessCardComponent {
   /** 标题 */
   @Input() title: string;
-  /** 宽度 */
-  @Input() width: string;
-  /** 高度 */
-  @Input() height: string;
+  @Input('class') classList = 'app-access-card';
   constructor() { }
 }
 

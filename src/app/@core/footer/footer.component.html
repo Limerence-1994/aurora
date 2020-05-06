@@ -1,4 +1,4 @@
-<div class="footer-box" [ngClass]="mode">
+<div class="footer-box" [ngClass]="mode" [class.show]="showFooter">
   <footer class="footer theme-backdrop-deep" [ngClass]="compassIsOpen ? 'open' : 'close'">
     <div class="footer-beam">
       <div class="asc-trapezoid theme-trapezoid footer-part left"></div>
@@ -9,9 +9,14 @@
       <div class="footer-content asc-column--4">
         <div class="theme-lining footer-float left"></div>
         <div class="logo">
-          <div class="asc-photo"><img src="assets/images/logo.png" alt=""></div>
+          <div class="asc-photo"><img src="src/assets/images/logo.png" alt=""></div>
           <h2 class="title">Aurora</h2>
+<!--          隐藏-->
+          <span class="asc-text-i18n" #open>Open</span>
+          <span class="asc-text-i18n" #hide>Close</span>
+<!--          隐藏-->
           <button mat-icon-button
+                  [matTooltip]="compassIsOpen ? hide.innerText : open.innerText"
                   class="theme-font-active button-open"
                   (click)="toggleFooContent()">
             <fa-icon [icon]="compassIsOpen ? 'times-circle' : 'compass'" size="2x"></fa-icon>
@@ -57,16 +62,14 @@
           </div>
         </div>
         <div class="footer-list-box" *ngIf="loadContent">
-          <div
-            *ngFor="let name of footerName"
-            class="footer-list">
-            <h3 i18n>{{name | uppercase}}</h3>
+          <div *ngFor="let name of footerName" class="footer-list">
+            <h5 i18n>{{name | uppercase}}</h5>
             <ul>
               <li *ngFor="let item of footerData[name]">
-                <a [routerLink]="item.src" class="theme-link-hover">
-                <span class="list_icon">
-                  <fa-icon class="icon-hover" [icon]="item.icon"></fa-icon>
-                </span>
+                <a [routerLink]="item.src" class="theme-link-hover asc-text-omit">
+                  <span class="list_icon">
+                    <fa-icon class="icon-hover" [icon]="item.icon"></fa-icon>
+                  </span>
                   {{item.name}}
                 </a>
               </li>

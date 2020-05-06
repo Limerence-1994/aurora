@@ -13,6 +13,7 @@ export class FooterComponent implements OnInit {
   @Input() mode: ModeState;
   compassIsOpen: boolean;
   loadContent: boolean;
+  showFooter: boolean;
   footerData = aboutData;
   footerName = Object.keys(aboutData);
 
@@ -22,11 +23,14 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.scroll.alreadyEndNotice().subscribe(r => {
-      if (!r) {
+    this.scroll.alreadyEndNotice().subscribe(isBottom => {
+      if (!isBottom) {
+        this.showFooter = false;
         this.hideFooter();
-        this.cdr.detectChanges();
+      } else {
+        this.showFooter = true;
       }
+      this.cdr.detectChanges();
     });
   }
 
@@ -46,7 +50,7 @@ export class FooterComponent implements OnInit {
   }
 
   hideFooter() {
-    ScrollService.scrollToTop();
+    ScrollService.windowScrollToTop();
     this.loadContent = false;
     this.compassIsOpen = false;
   }

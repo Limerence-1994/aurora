@@ -3,21 +3,86 @@
 $Breakpoint-sl: 1520px;
 $Breakpoint-xl: 1366px;
 $Breakpoint-lg: 1200px;
+$Breakpoint-nm: 1024px;
 /** 996 平板*/
 $Breakpoint-md: 996px;
 $Breakpoint-sm: 768px;
 $Breakpoint-xs: 576px;
+
 //体积
 $nav-height: 52px;
 $nav-effectiveArea: calc(100% - 32px);
-$main-height: calc(100vh - #{$nav-height});
-$curtain-height: calc(50vh - 14px);
-$screen-height: 430px;
-$main-top: 100px;
-$main-pd-right: 16px;
-// 形状
 $angle-width: 30px;
 $part-height: 28px;
+$main-height: calc(100vh - #{$nav-height});
+$curtain-height: calc(50vh - #{$part-height / 2});
+$screen-height: 430px;
+$card-width: 800px;
+$card-mini: $card-width * 0.8;
+
+// 距离
+$main-top: 100px;
+$padding-main: 16px;
+$margin-stage: 32px;
+
+@mixin card {
+  width: $card-width;
+  height: $card-width * 0.5;
+}
+
+@mixin mini-card {
+  @media (max-width: $Breakpoint-xl) {
+    width: $card-mini;
+    height: $card-mini * 0.5;
+  }
+}
+
+// 层级
+$level-max: 15; // 最高
+$level-curtain: 12; // 遮挡
+$level-top: 10; // fixed定位
+$level-height: 8; // 高层
+$level-default: 5; // 屏幕内 超出普通内容
+$level-low: 1; // 普通内容
+$level-negative: -1; // 底片
+
+
+// 动画
+@keyframes Move-down {
+  0% {
+    transform: translate3d(0, -100%, 0);
+    opacity: 1;
+  }
+  10% {
+    opacity: .25;
+  }
+  30% {
+    opacity: .9;
+  }
+  40% {
+    opacity: .3;
+  }
+  50% {
+    opacity: .8;
+  }
+  60% {
+    opacity: .6;
+  }
+  70% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .5;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(0, 500%, 0);
+    opacity: 0;
+  }
+}
+
 // 动画
 //大型
 $time-large: 750ms;
@@ -35,32 +100,3 @@ $time-ele-close: 250ms;
 $easing-tans: cubic-bezier(0.4, 0.0, 0.2, 1);
 $easing-enter: cubic-bezier(0.0, 0.0, 0.2, 1);
 $easing-leave: cubic-bezier(0.4, 0.0, 1, 1);
-
-// 层级
-$level-max: 15; // 最高
-$level-top: 10; // fixed定位
-$level-height: 8; // 高层
-$level-default: 5; // 屏幕内 超出普通内容
-$level-low: 1; // 普通内容
-$level-negative: -1; // 底片
-
-
-// 动画
-@keyframes Move-down {
-  0%{
-    transform: translate3d(0, -100%, 0);
-    opacity: 1;
-  }
-  10% {opacity: .25;}
-  30% {opacity: .9;}
-  40% {opacity: .3;}
-  50% {opacity: .8;}
-  60% {opacity: .6;}
-  70% {opacity: 1;}
-  80% {opacity: .5;}
-  90% {opacity: 0.7;}
-  100% {
-    transform: translate3d(0, 500%, 0);
-    opacity: 0;
-  }
-}

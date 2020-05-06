@@ -21,7 +21,7 @@ export const metaReducers: MetaReducer<State>[] = [logout];
 
 function logout(reducer) {
   return (state, action) => {
-    console.warn(`[store中间件]：${action.patron}>>>`, action);
+    console.log(`[${action.patron}]>>>`, action.payload);
     return reducer(state, action);
   };
 }

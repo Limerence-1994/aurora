@@ -1,6 +1,8 @@
 <div class="status-box" [ngClass]="panelClass"
      [style.width]="width+'px'">
-  <span class="status-text theme-lining">{{monitorStatus.caller | uppercase}}</span>
+  <span class="status-text">
+    <pub-text-distortion [text]="monitorStatus.caller"></pub-text-distortion>
+  </span>
   <div class="status-monitor theme-backdrop-deep">
     <div class="mask">
       <div class="schedule theme-beam"

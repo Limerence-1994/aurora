@@ -1,0 +1,21 @@
+<div class="error">
+  <access-card title="No Access" class="asc-access-card">
+    <access-card-head [icon]="icon">
+      <h1 class="glitch" data-label="Access Denied">
+        Access Denied
+      </h1>
+      <div><b>访问请求被拒绝</b></div>
+    </access-card-head>
+    <access-card-content>
+      <p><span i18n>Code：</span>{{data.code}}</p>
+      <p><span i18n>Description：</span>{{data.info}}</p>
+    </access-card-content>
+    <access-card-footer>
+      <div class="asc-buttons">
+        <button (click)="location.back()" mat-flat-button i18n>BACK</button>
+        <a routerLink="/" mat-flat-button color="accent" i18n>HOME</a>
+      </div>
+    </access-card-footer>
+  </access-card>
+</div>
+

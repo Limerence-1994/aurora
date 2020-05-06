@@ -11,3 +11,19 @@ export const once = <A extends any[], R, T>(
     return done ? void 0 : ((done = true), fn.apply(this, args));
   };
 };
+
+/**
+ * 模拟延迟
+ * @param time
+ */
+export function sleep(time: number): Promise<never> {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+/**
+ * 随机打乱一次字符串
+ * @param str
+ */
+export function upsetStr(str: string): string {
+  return str.split('').sort(_ => (Math.random() - 0.5)).join('');
+}

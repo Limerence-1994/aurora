@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ComponentAnimation} from '../../@extends/components';
-import {slideIntoLeft} from '../../@design/animations';
+import {Component, HostBinding, OnInit} from '@angular/core';
+import {convert} from '../../@design/animations';
 
 export interface SearchResult {
   id: string | number;
@@ -10,21 +9,26 @@ export interface SearchResult {
   selector: 'core-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss'],
-  animations: [slideIntoLeft]
+  animations: [convert(
+    {
+      start: 'translate3d(100%, 0, 0)',
+      end: 'translate3d(0, 0, 0)',
+      time: '150ms'
+    },
+    {time: '100ms'}
+  )]
 })
-export class SearchResultComponent extends ComponentAnimation implements OnInit {
-
+export class SearchResultComponent implements OnInit {
+  @HostBinding('@component') animate;
   isResult: boolean;
 
   constructor() {
-    super();
-    super.setEnter('translate3d(100%, 0, 0)', 'translate3d(0%, 0, 0)')
   }
 
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
-    super.setLeave('translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)')
+
   }
 }

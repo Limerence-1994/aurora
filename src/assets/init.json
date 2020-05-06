@@ -1,4 +1,9 @@
 {
-  "backendAPI": "https://easy-mock.com/mock/5ccbece50cfe960343d92eb7/",
-  "version": "Develop v0.1"
+  "version": "Develop v0.1",
+  "logo": "",
+  "currentTheme": "future",
+  "enName": "Aurora \n Technology Community",
+  "zhName": "极光科技共同体",
+  "zhIntroduction": "人类用知识去了解事物，用实践去改变事物。用前者去掌握宇宙，用后者去创造宇宙。",
+  "enIntroduction": "Humans use knowledge to understand things,\nuse practical activities to change things;\nuse the former to master the universe,\nand the latter to create the universe."
 }

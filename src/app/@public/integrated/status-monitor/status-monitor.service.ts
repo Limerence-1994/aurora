@@ -40,7 +40,7 @@ export class StatusMonitorService {
   }
 
   getProgressStatus(): Observable<MonitorConfig> {
-    return this.progress$.pipe(distinctUntilChanged());
+    return this.progress$.asObservable().pipe(distinctUntilChanged());
   }
 
   delay(d: number): this {
@@ -68,7 +68,7 @@ export class StatusMonitorService {
       this.progress$.next({ ...this.prevStatus, complete: true });
       this.prevStatus = new MonitorConfig();
     } else {
-      throw new Error('不能调用已经关闭的实例');
+     console.error('不能调用已经关闭的实例');
     }
   }
 

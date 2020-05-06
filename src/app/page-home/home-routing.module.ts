@@ -6,7 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    data: { identifier: 'home' }
+    data: { metadata: {identifier: 'HOME'} }
   },
 ];
 

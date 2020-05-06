@@ -1,14 +1,16 @@
-import {Component, HostBinding, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {Component, HostBinding, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import {AppModeService} from '../../@public/services';
 import {ModeStateEnum} from '../../@models/mode.model';
 import {CdkScrollable} from '@angular/cdk/overlay';
 import {faSignInAlt} from '@fortawesome/free-solid-svg-icons';
-import {faGoogle, faWeixin, faQq, faGithub, faFacebook} from '@fortawesome/free-brands-svg-icons';
-import {slideInto} from '../../@design/animations';
+import {convert} from '../../@design/animations';
 import {IconDefinition} from '@fortawesome/fontawesome-svg-core';
 import {PopupService} from '../../@public/services/popup/popup.service';
-import {ComponentAnimation} from '../../@extends/components';
+import {
+  faFacebook, faGithub, faGoogle, faQq, faWeixin
+} from '@fortawesome/free-brands-svg-icons';
+
 
 const options = [
   {name: 'oogle', tag: 'G', icon: faGoogle},
@@ -20,7 +22,8 @@ const options = [
 
 @Component({
   selector: 'app-signin-container',
-  template: `<div class="signin"></div>`,
+  template: `
+    <div class="signin"></div>`,
   styleUrls: ['./signin.component.scss'],
 })
 export class SignInContainerComponent implements OnInit, OnDestroy {
@@ -30,10 +33,11 @@ export class SignInContainerComponent implements OnInit, OnDestroy {
   constructor(
     private popup: PopupService,
     private mode: AppModeService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.mode.update(ModeStateEnum.SIMPLIFY);
+    this.mode.update(ModeStateEnum.SIMPLIFY, 'sign in');
     this.popupRef = this.popup.open(SignInComponent);
   }
 
@@ -47,47 +51,56 @@ export class SignInContainerComponent implements OnInit, OnDestroy {
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
-  animations: [slideInto]
+  animations: [convert(
+    {
+      start: 'translate3d(100%, 0, 0)',
+      end: 'translate3d(0, 0, 0)',
+    },
+    {time: '350ms'}
+  )]
 })
-export class SignInComponent extends ComponentAnimation implements OnDestroy {
-
+export class SignInComponent implements OnDestroy {
+  @HostBinding('@component') animate;
   @ViewChild(CdkScrollable) content: CdkScrollable;
 
   private position = 0;
   icon: IconDefinition = faSignInAlt;
   signInOptions = options;
-  step    = '';
+  step = '';
   account = '';
   password: string;
 
   constructor(public location: Location) {
-    super();
-    super.setEnter('translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)')
   }
 
   ngOnDestroy(): void {
-    super.setLeave('translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)')
   }
 
   checkAccount() {
     const upperValue: string = this.account.toUpperCase();
     switch (upperValue) {
-      case 'G': case 'GOOGLE':
+      case 'G':
+      case 'GOOGLE':
         console.log('GOOGLE');
         break;
-      case 'W': case 'WECHAT':
+      case 'W':
+      case 'WECHAT':
         console.log('微信');
         break;
-      case 'Q': case 'QQ':
+      case 'Q':
+      case 'QQ':
         console.log('QQ');
         break;
-      case 'H': case 'GITHUB':
+      case 'H':
+      case 'GITHUB':
         console.log('GITHUB');
         break;
-      case 'F': case 'FACKBOOK':
+      case 'F':
+      case 'FACKBOOK':
         console.log('FACKBOOK');
         break;
-      case 'B': case 'BACK':
+      case 'B':
+      case 'BACK':
         this.location.back();
         break;
       default:

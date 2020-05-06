@@ -1,7 +1,5 @@
 @import "src/app/@design/default";
 
-$card-width: 800px;
-
 .clip {
   border-bottom-right-radius: 16px;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
@@ -11,8 +9,6 @@ $card-width: 800px;
   display: flex;
   padding: 16px 16px 16px 8px;
   border-radius: 5px;
-  width: $card-width;
-  height: $card-width * 0.5;
   user-select: none;
 }
 
@@ -28,9 +24,9 @@ $card-width: 800px;
   writing-mode: tb-lr;
 }
 .content {
+  display: flex;
   flex: 1;
   padding: 16px;
-  display: flex;
   width: 100%;
   height: 100%;
   flex-direction: column;
